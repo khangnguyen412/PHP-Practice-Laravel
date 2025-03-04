@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  app:
+    # image: php:8.2-fpm # cấu hình theo version php source đang chạy
+    build: .
+    container_name: Laravel-App
+    working_dir: /var/www
+    volumes:
+      - .:/var/www 
+      # nếu docker-compose.yml nằm cùng folder: forward folder dự án hiện tại ./ tới thư mục /var/www
+      # nếu docker-compose.yml ko nằm cùng folder: forward folder dự án hiện tại chỉ định đường dẫn tuyệt đói tới thư mục /var/www
+      #   - C:/wamp64/www/practicePhp/Laravel/laravelLearning:/var/www
+    ports:
+      - "81:8000"
+    networks:
+      - laravel
+
+  webserver:
+    image: nginx:alpine
+    container_name: laravel-Webserver
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      # nếu docker-compose.yml nằm cùng folder: forward folder dự án hiện tại ./ tới thư mục /var/www
+      # nếu docker-compose.yml ko nằm cùng folder: forward folder dự án hiện tại chỉ định đường dẫn tuyệt đói tới thư mục /var/www
+      #   - C:/wamp64/www/practicePhp/Laravel/laravelLearning:/var/www
+    depends_on:
+      - app
+    networks:
+      - laravel
+
+  mysql:
+    image: mysql:5.7
+    container_name: Laravel-Sql
+    restart: always
+    environment:
+      MYSQL_DATABASE: laravel_learning
+      MYSQL_ROOT_PASSWORD: khang412
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - laravel
+
+networks:
+  laravel:
+    driver: bridge
+
+volumes:
+  mysql_data:
