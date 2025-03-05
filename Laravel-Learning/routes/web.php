@@ -739,6 +739,11 @@ use App\Http\Controllers\lecture14\controllerLecture14;
 Route::get('/collection-map-14', [controllerLecture14::class, 'collection_map']);
 Route::get('/collection-map-14-filter', [controllerLecture14::class, 'collection_filter']);
 Route::get('/collection-map-14-except', [controllerLecture14::class, 'collection_except']);
+Route::get('/collection-map-14-count', [controllerLecture14::class, 'collection_count']);
+Route::get('/collection-map-14-avg', [controllerLecture14::class, 'collection_avg']);
+Route::get('/collection-map-14-get', [controllerLecture14::class, 'collection_get']);
+Route::get('/collection-map-14-sort-by', [controllerLecture14::class, 'collection_sort_by']);
+Route::get('/collection-map-14-sort-by-desc', [controllerLecture14::class, 'collection_sort_by_desc']);
 
 /******************* Api ****************************/
 /**

@@ -1,9 +1,13 @@
++ Xoá docker cũ
+    $ docker image prune -a -f
 + Chạy docker compose build Dockerfile
-    docker-compose build
+    $ docker-compose build
 + Chạy các gói service 
     docker-compose up -d
 + Chạy composer 
-    docker exec Laravel-App php artisan serve --host=0.0.0.0 --port=8000 
+    $ docker restart Laravel-App
+    - khởi động lại container để thoát các port chiếm dụng
+    $ docker exec Laravel-App php artisan serve --host=0.0.0.0 --port=8000 
     - --port=8000 start trên :8000 nhưng tại service Laravel-App trong file docker-compose.yml forward :81
     - --host=0.0.0.0 lắng nghe tất cả các port bên ngoài vào
 + Kết laravel tới mysql của docker
