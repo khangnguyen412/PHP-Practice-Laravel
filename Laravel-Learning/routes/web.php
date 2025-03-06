@@ -744,6 +744,9 @@ Route::get('/collection-map-14-avg', [controllerLecture14::class, 'collection_av
 Route::get('/collection-map-14-get', [controllerLecture14::class, 'collection_get']);
 Route::get('/collection-map-14-sort-by', [controllerLecture14::class, 'collection_sort_by']);
 Route::get('/collection-map-14-sort-by-desc', [controllerLecture14::class, 'collection_sort_by_desc']);
+Route::get('/collection-map-14-test', function(){
+    return view("lecture14.viewLecture14");
+});
 
 /******************* Api ****************************/
 /**

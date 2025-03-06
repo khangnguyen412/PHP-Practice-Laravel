@@ -18,7 +18,7 @@ services:
 
   webserver:
     image: nginx:alpine
-    container_name: laravel-Webserver
+    container_name: Laravel-Webserver
     ports:
       - "80:80"
     volumes:

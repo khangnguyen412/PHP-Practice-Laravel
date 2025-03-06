@@ -18,3 +18,16 @@
     Cách 1 (trường hợp ip thay đổi):
     - DB_HOST=[tên-service] => thường tên của service là mysql
     - DB_PORT=3306 => port được cấu hình trong docker, ko phải port forward ra bên ngoài
++ Lỗi failed to solve: archive/tar: unknown file mode ?rwxr-xr-x:
+    - Tạo file .dockerignore 
+    - Bỏ **/node_modules/ vào để loại khỏi quá trình chạy file
++ Cài đặt tailwindcss:
+    - cài đặt node mới nhất (16 sẽ bị lỗi: TypeError: crypto$2.getRandomValues is not a function)
+    $ docker exec -it Laravel-App bash
+    $ npm install -D tailwindcss@3 postcss autoprefixer
+    $ npx tailwindcss init -p
+    - Cấu hình file:
+    ./Laravel-Learning/tailwind.config.js
+    ./Laravel-Learning/resources/css/app.css
+    $ npm run build
+    $ npm run dev
