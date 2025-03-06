@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="build/assets/app-BaVMVknW.css">
+    <link rel="stylesheet" href="build/assets/app.css">
 </head>
 
 <body>
@@ -160,7 +160,7 @@
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="build/assets/app-But0Grfk.js"></script>
+<script src="build/assets/app2.js"></script>
 <script src="build/assets/main.js"></script>
 <script src="build/assets/sidebar.js"></script>
 

@@ -40,7 +40,7 @@ services:
       MYSQL_DATABASE: laravel_learning
       MYSQL_ROOT_PASSWORD: khang412
     ports:
-      - "3307:3306"
+      - "3308:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
