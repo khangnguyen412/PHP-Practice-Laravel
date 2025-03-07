@@ -14,6 +14,11 @@
 - --port=8000 start trên :8000 nhưng tại service Laravel-App trong file docker-compose.yml forward :81
 - --host=0.0.0.0 lắng nghe tất cả các port bên ngoài vào
 
++ Chạy cấu lệnh trong terminal của container docker
+- Docker giống một hệ điều hành thu nhỏ nên cũng có terminal
+- Cách chạy terminal: 
+    $ docker exec -it [service-name/container-name] bash
+
 + Kết laravel tới mysql của docker
 Cách 1 (trường hợp ip ko thay đổi):
     - Vào CMD chay ipconfig lấy [ipv4]

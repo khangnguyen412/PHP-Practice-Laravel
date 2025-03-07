@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="build/assets/app.css">
+    <link rel="stylesheet" href="build/assets/styles.css">
 </head>
 
 <body>
@@ -58,7 +58,7 @@
                         <svg class="w-8 h-8 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                         </svg>
-                        <span class="font-bold text-xl">Logo</span>
+                        <span class="font-bold text-xl">MyWebsite</span>
                     </a>
                 </div>
 
@@ -108,7 +108,6 @@
             </form>
         </div>
 
-        <% JSON.stringify(data) %>
         <div class="container sm:container md:container lg:container xl:container 2xl:container mx-auto p-4">
             <div class="overflow-x-auto">
                 <table class="min-w-full text-sm text-left text-gray-500">
@@ -118,24 +117,23 @@
                             <th scope="col" class="px-6 py-3">Name</th>
                             <th scope="col" class="px-6 py-3">Email</th>
                             <th scope="col" class="px-6 py-3">City</th>
-                            <th scope="col" class="px-6 py-3">Column 5</th>
-                            <th scope="col" class="px-6 py-3">Column 6</th>
+                            <th scope="col" class="px-6 py-3">Update</th>
+                            <th scope="col" class="px-6 py-3">Delect</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <% data.forEach(item => { %>
                         <tr class="bg-white border-b">
                             <td class="px-6 py-4 font-medium text-gray-900">
-                                <%= item.id %>
+                                Id
                             </td>
                             <td class="px-6 py-4">
-                                <%= item.username %>
+                                Username
                             </td>
                             <td class="px-6 py-4">
-                                <%= item.email %>
+                                Email
                             </td>
                             <td class="px-6 py-4">
-                                <%= item.city %>
+                                City
                             </td>
                             <td class="px-6 py-4">
                                 <a class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
@@ -148,19 +146,17 @@
                                 </a>
                             </td>
                         </tr>
-                        <% }); %>
                     </tbody>
                 </table>
             </div>
         </div>
-
     </main>
 
 </body>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="build/assets/app2.js"></script>
+<script src="build/assets/app.js"></script>
 <script src="build/assets/main.js"></script>
 <script src="build/assets/sidebar.js"></script>
 
