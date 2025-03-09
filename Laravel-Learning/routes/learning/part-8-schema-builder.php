@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Schema;
 /******************* lecture 15: Schema builder  ****************************/
 /**
  *  - Xây dưng database bằng migrations (thực hiện trong Laravel-Learning/database/migrations)
+ *  - Tạo Migrations:
+ *      $ php artisan make:migration [file-name] --create=[talbe-name]
+ *  - Các thuộc tính của bảng: https://laravel.com/docs/9.x/migrations#available-column-types
+ *  - Tạo ràng buộc: https://laravel.com/docs/9.x/migrations#creating-indexes
+ *  - Bắt khóa ngoại: https://laravel.com/docs/9.x/migrations#foreign-key-constraints
  *  - Chạy câu lệnh:
  *      $ php artisan migrate --path=./database/migrations/[file-name].php
  *  - Lệnh trên thực hiện đúng [file-name].php ko tự động generate hoặc exec các file khác
