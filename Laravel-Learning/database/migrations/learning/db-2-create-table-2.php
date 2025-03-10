@@ -16,8 +16,8 @@ new class extends Migration {
          */
         Schema::create('name_table', function(Blueprint $table){
             $table->id('id_table');
-            $table->unsignedBigInteger('col_1');
-            $table->unsignedBigInteger('col_2');
+            $table->unsignedBigInteger('col_1'); // Phải đúng kiểu dữ liệu của bảng cha thứ nhất
+            $table->unsignedBigInteger('col_2'); // Phải đúng kiểu dữ liệu của bảng cha thứ hai
             $table->timestamp('')->nullable();
             $table->primary(['col_1', 'col_2']); // Khóa chính kép
             /**

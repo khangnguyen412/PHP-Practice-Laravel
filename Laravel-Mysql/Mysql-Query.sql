@@ -1,12 +1,5 @@
 create database laravelLearning;
 drop database laravelLearning;
-create table test(
-    fullName nvarchar(100),
-    age int Not Null
-);
-select * from test;
-alter table test drop column id;
-drop table test;
 
 -- truy xuất db mẫu
 select * from acc_transaction;
@@ -25,5 +18,7 @@ select sum(AVAIL_BALANCE) as 'SUM AVAIL BALANCE',mona_prex_options PRODUCT_CD fr
 insert into account value (30, 6000, null, '2004-12-17', '2004-12-15', 6000, 'ACTIVE', 10, 1, 1, 'CD');
 update account set STATUS = 'INACTIVE' where ACCOUNT_ID = 30;
 delete from account where ACCOUNT_ID = 30;
+select * from customer left join individual on customer.cust_id = individual.cust_id;
+select * from customer inner join officer on customer.cust_id = officer.cust_id;
 
 SET SQL_SAFE_UPDATES = 0;

@@ -4,11 +4,12 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-new class extends Migration {
+return new class extends Migration {
     public function up() {
         /**
          *  - Drop bảng nếu tồn tại
          */
+        Schema::disableForeignKeyConstraints(); 
         Schema::dropIfExists('level');
 
         /**
@@ -20,6 +21,7 @@ new class extends Migration {
             $table->text('description')->nullable();
             $table->timestamps(); // tự tạo ra thuộc tính create_at và update_at
         });
+        Schema::enableForeignKeyConstraints(); 
     }
     public function down() {
         Schema::dropIfExists('level');

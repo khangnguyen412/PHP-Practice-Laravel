@@ -49,6 +49,6 @@ use App\Http\Controllers\lecture13\controllerLecture13;
 // Eloquent one-to-one 
 Route::get('/relations-eloquent-13', [controllerLecture13::class, 'show_eloquent_relationship_13']);
 // Eloquent one-to-many 
-Route::get('/relations-eloquent-13-1', [controllerLecture13::class, 'show_eloquent_relationship_13_1']);
+Route::get('/relations-eloquent-13-one-many', [controllerLecture13::class, 'show_eloquent_relationship_13_1']);
 // Eloquent many-to-many 
-Route::get('/relations-eloquent-13-2', [controllerLecture13::class, 'show_eloquent_relationship_13_2']);
+Route::get('/relations-eloquent-13-many-many', [controllerLecture13::class, 'show_eloquent_relationship_13_2']);
