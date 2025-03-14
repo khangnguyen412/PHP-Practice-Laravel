@@ -100,7 +100,6 @@ ghi chú bài học:
 lecture14: Collection trong Laravel
 https://toidicode.com/cac-moi-quan-he-relationships-trong-eloquent-15.html
 ghi chú bài học:
-- /route/web.php
 - /routes/learning/part-7-collection.php
 - /app/Http/Controllers/lecture14/controllerLecture14.php
 - /app/Models/lecture12/modelLecture12.php
@@ -110,6 +109,12 @@ lecture15-16: Schema
 https://toidicode.com/schema-buider-trong-laravel-16.html
 https://toidicode.com/migrations-trong-laravel-17.html
 ghi chú bài học:
-- /route/web.php
-- /routes/learning/part-8-schema-builder.php
+- /routes/learning/part-8-database.php
 - /database/migrations
+
+======================
+lecture17: Seeding
+https://toidicode.com/seeding-trong-laravel-18.html
+ghi chú bài học:
+- /routes/learning/part-8-database.php
+- /database/seeders

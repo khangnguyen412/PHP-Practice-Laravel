@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\lecture14;
+namespace App\Http\Controllers\Lecture14;
 
 use App\Http\Controllers\Controller;
-use App\Models\lecture12\modelLecture12;
+use App\Models\lecture12\ModelLecture12;
 use Illuminate\Support\Collection; // Gọi thư viện collection
 
-class controllerLecture14 extends Controller
+class ControllerLecture14 extends Controller
 {
     /**
      *  Lấy tất cả giá trị của mãng
@@ -75,7 +75,7 @@ class controllerLecture14 extends Controller
      */
     public function collection_sort_by()
     {
-        $arr = modelLecture12::get();
+        $arr = ModelLecture12::get();
         $collection = collect($arr)->sortBy('Age');
         $collection = $collection->values(); // reset lại các key của mãng [9=>'', 4=>'', 5=>''] => [0=>'', 1=>'', 2=>'']
         return $collection->toJson(JSON_UNESCAPED_UNICODE);
@@ -86,7 +86,7 @@ class controllerLecture14 extends Controller
      */
     public function collection_sort_by_desc()
     {
-        $arr = modelLecture12::get();
+        $arr = ModelLecture12::get();
         $collection = collect($arr)->sortByDesc('account_id');
         $collection = $collection->values();
         return $collection->toJson(JSON_UNESCAPED_UNICODE);

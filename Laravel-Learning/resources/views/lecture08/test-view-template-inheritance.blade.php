@@ -1,4 +1,4 @@
-@extends('lecture08.parentTemplate') 
+@extends('lecture08.parent-template') 
 {{-- 
     @extends() - có tác dụng như là kế thừa lại template được gọi
     phải trỏ từ đường dẫn views 

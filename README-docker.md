@@ -1,3 +1,6 @@
+Lưu Ý: nếu máy 95 độ khi chạy docker, chack task manager có đang chạy vmmem ko, nếu có đừng WSL
+https://superuser.com/questions/1645056/how-can-i-stop-vmmem-process
+
 + Xoá docker cũ
     $ docker image prune -a -f
 

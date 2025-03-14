@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\lecture09;
+namespace App\Http\Controllers\Lecture09;
 
 use App\Http\Controllers\Controller;
 
@@ -10,17 +10,17 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use user;
 
-class controllerLecture09 extends Controller
+class ControllerLecture09 extends Controller
 {
-    public function testController()
+    public function test_controller()
     {
         echo "test success";
     }
 
-    public function getName($name = NULL, $age = NULL)
+    public function get_name($name = NULL, $age = NULL)
     {
         ?>
-            <p>đầy là hàm getName() trong controllerLecture09</p>
+            <p>đầy là hàm getName() trong ControllerLecture09</p>
         <?php
         if ($name != Null && $age != NULL) {
             ?>
@@ -33,7 +33,7 @@ class controllerLecture09 extends Controller
         }
     }
 
-    public function addDB(): View
+    public function add_db(): View
     {
         $data = [
             'ACCOUNT_ID'   => 31,
@@ -52,8 +52,8 @@ class controllerLecture09 extends Controller
         $users = DB::table('account')->where('ACCOUNT_ID', 31)->get(); // lấy tất cả dữ liệu từ database gán cho users 
         
         DB::table('account')->where('ACCOUNT_ID', 31)->delete();
-        $usersAfterDelete = DB::table('account')->get(); // clear dữ liệu
+        $users_after_delete = DB::table('account')->get(); // clear dữ liệu
 
-        return view('lecture09.viewLecture09', ['users' => $users, 'usersAfterDelete' => $usersAfterDelete]);
+        return view('lecture09.view-lecture09', ['users' => $users, 'users_after_delete' => $users_after_delete]);
     }
 }

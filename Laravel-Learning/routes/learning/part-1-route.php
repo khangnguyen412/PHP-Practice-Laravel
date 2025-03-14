@@ -38,7 +38,7 @@ Route::get('/hello-world', function () {
 });
 // gọi tới đường dẫn '/testGetRoute' chính sẽ được chuyển tới views/lecture03/testGetRoute.blade.php
 Route::get('/test-route-get', function () {
-    return view('lecture03.testRouteGet');
+    return view('lecture03.test-route-get');
 });
 
 
@@ -56,7 +56,7 @@ Route::get('/test-route-get', function () {
 // tạo 1 form nhập dữ liệu có method post tại file views/lecture03/getFormPost.blade.php
 // trong form sẽ có phương thức post vào gọi tới url /testPostRoute
 Route::get('/get-post-form', function () {
-    return view('lecture03.getPostForm');
+    return view('lecture03.get-post-form');
 });
 // gọi tới đường dẫn '/testPostRoute' sẽ thực hiện 1 function ở phía sau nhưng sử dụng post
 Route::post('/test-route-post', function (Request $arr) {
@@ -77,7 +77,7 @@ Route::post('/test-route-post', function (Request $arr) {
  *      -> $action là một câu lệnh hoặc hàm nào đó khi được gọi tới đường dẫn trùng với $url
  */
 Route::get('/get-match-form', function () {
-    return view('lecture03.getMatchForm');
+    return view('lecture03.get-match-form');
 });
 Route::match(['get', 'post'], '/test-route-match', function (Request $arr) {
     $param1 = $arr->input('name');
@@ -119,27 +119,45 @@ Route::any('/test-route-any', function () {
  *  Để dùng route::resource tạo restful ta dùng lệnh:    php artisan make:controller TenController --resource
  *  Trong đó: 
  *      -> TenController là tên của controller bạn muốn tạo
- * 
- *  nhập url /getRouteResource để nhận method index()
- *  nhập url /getRouteResource/create để nhận method create()
- *  nhập url /getRouteResource/ để nhận method store()
- *  nhập url /getRouteResource/{something} để nhận method show()
- *  nhập url /getRouteResource/{something}/edit để nhận method edit()
- *  nhập url /getRouteResource/{something} để nhận method update()
- *  nhập url /getRouteResource/{something} để nhận method destroy()
  */
-// Gọi thư viện 
-use App\Http\Controllers\lecture04\controllerLecture04; //gọi controller từ lecture04\controllerLecture04
-Route::resource('/get-route-resource', controllerLecture04::class);
-// ngoài ra có thể dùng tùy biến [only] để lọc các method()
-// chỉ nhận 3 method create(), show(). edit()
-Route::resource('/get-route-resource-only', controllerLecture04::class, ['only' => ['create', 'show', 'edit']]);
-// cấm method index(), gọi vào sẽ xuất lỗi
-Route::resource('/get-route-resource-except', controllerLecture04::class, ['except' => ['index']]);
-// truyền tham số thêm vào route resource
-// cách truyền url /get-route-resource-with-param/{param1}/author/{param2}
-Route::resource('/get-route-resource-with-param.author', controllerLecture04::class);
-
+use App\Http\Controllers\Lecture04\ControllerLecture04; // Gọi controller từ lecture04\ControllerLecture04
+/**
+ *  - Nhận menthod index() từ controler
+ *  - Gọi  url /getRouteResource để nhận method index()
+ */
+Route::resource('/get-route-resource', ControllerLecture04::class);
+/**
+ *  - Ngoài ra có thể dùng tùy biến [only] để lọc các method()
+ *  - Ví dụ: ControllerLecture04::class, ['only' => ['create', 'show', 'edit']]) => chỉ nhận 3 method create(), show(). edit()
+ *  - Gọi url /getRouteResource/create để nhận method create()
+ *  - Gọi url /getRouteResource/{something} để nhận method show()
+ *  - Gọi url /getRouteResource/{something}/edit để nhận method edit()
+ *  - Gọi url /getRouteResource/ trong menthod post của form để nhận method store()
+ *  - Gọi url /getRouteResource/{something} để nhận method update()
+ *  - Gọi url /getRouteResource/{something} để nhận method destroy()
+ */
+Route::resource('/get-route-resource-only', ControllerLecture04::class, ['only' => ['create', 'show', 'edit']]);
+/**
+ *  - Cấm method index(), gọi vào sẽ xuất lỗi
+ *  - Gọi url /get-route-resource-except => nhận lỗi MethodNotAllowedHttpException
+ */
+Route::resource('/get-route-resource-except', ControllerLecture04::class, ['except' => ['index']]);
+/**
+ *  - Truyền tham số thêm vào route resource
+ *  - Gọi url /get-route-resource-with-param/{param1}/author/{param2}
+ */ 
+Route::resource('/get-route-resource-with-param.author', ControllerLecture04::class);
+/**
+ *  *Lưu ý: ['only']['except'] Chỉ sử dụng được với cái phương thức mà controller tạo sẳn, ko sử dụng được với phương thức khác
+ *  - Các phương thức tạo sẵn: 
+ *      + GET	    /resource           index()
+ *      + GET	    /resource/create    create()
+ *      + POST	    /resource           store()
+ *      + GET	    /resource/{id}      show()
+ *      + GET	    /resource/{id}/edit	edit()
+ *      + PUT/PATCH	/resource/{id}      update()
+ *      + DELETE	/resource/{id}      destroy()
+ */
 
 /**
  *  Route::group(): Là một cách để nhóm các route lại với nhau, giúp bạn tổ chức mã nguồn một cách gọn gàng và cấu trúc.
@@ -153,18 +171,18 @@ Route::resource('/get-route-resource-with-param.author', controllerLecture04::cl
  *      - $handle là các câu lệnh hoặc hàm thực hiện chức năng cho route đó
  */
 // sử dụng route::group(prefix)
-Route::group(['prefix' => 'testRouteGroup'], function () {
+Route::group(['prefix' => '/test-route-group'], function () {
     Route::get('get', function () {
-        return view("lecture04.testRouteGroup");
+        return view("lecture04.test-route-group");
     });
     Route::get('return', function () {
         return 'đây là phần tử của route group';
     });
 });
 // sử dụng route::controller()
-Route::controller(controllerLecture04::class)->group(function () {
-    Route::get('/get-route-grp-with-ctrl/{param}', 'testGroup');
-    Route::get('/get-route-grp-with-ctrl', 'testGroup');
+Route::controller(ControllerLecture04::class)->group(function () {
+    Route::get('/get-route-grp-with-ctrl/{param}', 'group');
+    Route::get('/get-route-grp-with-ctrl', 'group');
 });
 
 
@@ -178,9 +196,9 @@ Route::controller(controllerLecture04::class)->group(function () {
  *      - [prefix/] là tiền tố của đường dẫn, ví dụ: prefix/admin, prefix/user, prefix/...
  *      - $handle là các câu lệnh hoặc hàm thực hiện chức năng cho route đó
  */
-Route::prefix('test-route-prefix')->group(function () {
+Route::prefix('/test-route-prefix')->group(function () {
     Route::get('get', function () {
-        return view("lecture04.testRouteGroup");
+        return view("lecture04.test-route-group");
     });
 });
 
@@ -196,16 +214,16 @@ Route::prefix('test-route-prefix')->group(function () {
  *      - [URI2] là các đường dẫn của route sẽ được chuyển hướng tới sau khi gọi 
  *      - $status là trang thái của route khi gọi tới
  */
-Route::redirect('test-route-redirect', 'testRedirect', 301);
-Route::get('/testRedirect', function () {
-    return view('lecture04.testRouteRedirect');
+Route::redirect('/test-route-redirect', 'test-redirect', 301);
+Route::get('/test-redirect', function () {
+    return view('lecture04.test-route-redirect');
 });
 
 
 /******************* lecture 5: route (part3) ****************************/
 // truyền biến vào route
-Route::get('/put-args-in-route/{param}', function ($param) {
-    return view('lecture05.putArgInRoute', ['param' => $param]);
+Route::get('/put-args-to-route/{param}', function ($param) {
+    return view('lecture05.put-args-to-route', ['param' => $param]);
     /**
      * {param} là tham số được truyền vào route
      * truyền thêm tham số name trong mãng ['name' => $name] vào view
@@ -213,10 +231,10 @@ Route::get('/put-args-in-route/{param}', function ($param) {
      */
 });
 // truyền nhiều tham số vào route
-Route::get('/put-args-in-route/{param1}/{param2}', function ($param1, $param2) {
-    return view('lecture05.putArgsInRoute', ['param1' => $param1, "param2" => $param2]);
+Route::get('/put-args-to-route/{param1}/{param2}', function ($param1, $param2) {
+    return view('lecture05.put-args-to-route2', ['param1' => $param1, "param2" => $param2]);
 });
 // truyền biến vào route có điều kiện, nếu đk không đúng => not found
 Route::get('/put-args-in-route-with-condition/{param1}/{param2}', function ($param1, $param2) {
-    return view('lecture05.putArgsInRoute', ['param1' => $param1, "param2" => $param2]);
+    return view('lecture05.put-args-to-route2', ['param1' => $param1, "param2" => $param2]);
 })->where(['param1' => '[a-z]+', 'param2' => '[0-9]+']);

@@ -45,6 +45,7 @@ class RouteServiceProvider extends ServiceProvider
                     base_path('routes/learning/part-6-eloquent.php'),
                     base_path('routes/learning/part-7-collection.php'),
                     base_path('routes/learning/part-8-database.php'),
+                    base_path('routes/learning/part-9-form-request.php'),
                 ]);
         });
     }

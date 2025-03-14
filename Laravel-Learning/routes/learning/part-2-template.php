@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
  *  -Đuôi của file view trong laravel có định dạng là .blade.php (blade template)
  *  -Hoặc file .php, nếu blade.php thì phải dùng cú pháp của blade template
  * 
- *  Ví dụ ở đường dẫn: resources/views/lecture06/viewTemplate.blade.php
+ *  Ví dụ ở đường dẫn: resources/views/lecture06/view-template.blade.php
  * 
  *  Cú pháp: 
  *      $ view('url', 'param');
@@ -22,12 +22,12 @@ use Illuminate\Support\Facades\Route;
  *      - 'param' là tham số truyền vào view (nếu có)
  */
 // gọi view trong route
-Route::get('test-view-template', function () {
-    return view('lecture06.ViewTemplate');
+Route::get('/test-view-template', function () {
+    return view('lecture06.view-template');
 });
-// truyền biến vào view có file .php
-Route::get('test-view-template-php-file/{param}', function ($param) {
-    return view('lecture06.ViewTemplatePhp', ['param' => $param]);
+// truyền biến vào view ko có .blade.php
+Route::get('/test-view-template-php-file/{param}', function ($param) {
+    return view('lecture06.view-template-php', ['param' => $param]);
 });
 // tạo view dùng chung (trong app/Providers/AppServiceProvider.php.)
 
@@ -41,8 +41,8 @@ Route::get('test-view-template-php-file/{param}', function ($param) {
  *      - 'url' là đường dẫn tới view
  *      - param là đối số truyền vào
  */
-Route::get('test-view-template-use-compact/{param}', function ($param) {
-    return view("lecture06.viewTemplateUseCompact", compact('param'));
+Route::get('/test-view-template-use-compact/{param}', function ($param) {
+    return view("lecture06.view-template-use-compact", compact('param'));
 });
 
 
@@ -56,8 +56,8 @@ Route::get('test-view-template-use-compact/{param}', function ($param) {
  *      - 'key' là tên của đối số được truyền
  *      - $value là giá trì của đối số
  */
-Route::get('test-view-template-use-with/{param}', function ($param) {
-    return view("lecture06.viewTemplateUseWith")->with('param', $param);
+Route::get('/test-view-template-use-with/{param}', function ($param) {
+    return view("lecture06.view-template-use-with")->with('param', $param);
 });
 
 
@@ -71,8 +71,8 @@ Route::get('test-view-template-use-with/{param}', function ($param) {
  *      - 'key' là tên của đối số được truyền
  *      - $value là giá trì của đối số
  */
-Route::get('test-view-template-use-array/{param}', function ($param) {
-    return view("lecture06.viewTemplateUseArray", ['param' => $param]);
+Route::get('/test-view-template-use-array/{param}', function ($param) {
+    return view("lecture06.view-template-use-array", ['param' => $param]);
 });
 
 
@@ -87,16 +87,16 @@ Route::get('test-view-template-use-array/{param}', function ($param) {
  *      - $variable là biến được truyền vào
  */
 //  truyền tham số /{param} vào view template
-Route::get('test-blade-template/{param}', function ($param) {
-    return view("lecture07.testViewEngine", ["param" => $param]);
+Route::get('/test-blade-template/{param}', function ($param) {
+    return view("lecture07.test-view-engine", ["param" => $param]);
 });
 // câu lệnh vòng lặp trong blade template
-Route::get('test-blade-template-with-loop/', function () {
-    return view("lecture07.testViewEngineLoop");
+Route::get('/test-blade-template-with-loop', function () {
+    return view("lecture07.test-view-engine-loop");
 });
 // câu lệnh điều kiện trong blade template
-Route::get('test-blade-template-with-condition/', function () {
-    return view("lecture07.testViewEngineCondition");
+Route::get('/test-blade-template-with-condition', function () {
+    return view("lecture07.test-view-engine-condition");
 });
 
 
@@ -104,9 +104,9 @@ Route::get('test-blade-template-with-condition/', function () {
 /**
  *  Template kế thừa (Template inheritance)
  *  Ghi chứ bài học trong:
- *      - resources/views/lecture08/testViewTemplateInheritance.blade.php
- *      - resources/views/lecture08/parentTemplate.blade.php
+ *      - resources/views/lecture08/test-view-template-inheritance.blade.php
+ *      - resources/views/lecture08/parent-template.blade.php
  */
-Route::get('test-blade-template-inheritance/', function () {
-    return view("lecture08.testViewTemplateInheritance");
+Route::get('/test-blade-template-inheritance', function () {
+    return view("lecture08.test-view-template-inheritance");
 });

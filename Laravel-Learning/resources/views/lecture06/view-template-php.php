@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="">
 </head>
 <body>
-    <?php
-        echo $param
-    ?>
+    <?php echo $param ?>
 </body>
 </html>

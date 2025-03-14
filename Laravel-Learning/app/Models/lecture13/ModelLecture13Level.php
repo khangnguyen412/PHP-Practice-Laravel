@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\App;
  * Eloquent relationships Many to Many
  * Bảng account vs level: n-n
  */
-class model_lecture13_level extends Model
+class ModelLecture13Level extends Model
 {
     use HasFactory; // Sử dụng hasfactory để tự động dump db
     protected $table = 'level';
@@ -36,6 +36,6 @@ class model_lecture13_level extends Model
          * $foreignKey: tên khóa ngoại của bảng n thứ 1
          * $relatedKey: tên khóa ngoại của bảng n thứ 2
          */
-        return $this->belongsToMany(model_lecture13_account::class, 'account_level', 'level_id', 'account_id');
+        return $this->belongsToMany(ModelLecture13Account::class, 'account_level', 'level_id', 'account_id');
     }
 }

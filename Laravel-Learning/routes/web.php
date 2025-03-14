@@ -44,9 +44,9 @@ Route::get('/project', function () {
 
 /******************* connect api wp ****************************/
 
-use App\Http\Controllers\wpConnectApi\wpConnectApi;
+use App\Http\Controllers\WpConnectApi\WpConnectApi;
 
-Route::get('/wp-api', [wpConnectApi::class, 'getWpApi']);
+Route::get('/wp-api', [WpConnectApi::class, 'get_wp_api']);
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\App;
  * Eloquent relationships One to One
  * Bảng person vs passport: 1-1
  */
-class modelLecture15 extends Model
+class model_lecture15 extends Model
 {
     protected $table = "";
     protected $primaryKey = "";

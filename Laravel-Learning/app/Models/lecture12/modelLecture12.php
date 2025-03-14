@@ -5,7 +5,7 @@ namespace App\Models\lecture12; // Khi move file tới subfolder-> sửa lại n
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class modelLecture12 extends Model // Khi rename file -> sửa lại tên class
+class ModelLecture12 extends Model // Khi rename file -> sửa lại tên class
 {
     use HasFactory;
 

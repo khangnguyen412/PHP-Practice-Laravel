@@ -8,21 +8,18 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\App;
 
 /**
- * Eloquent relationships One to Many
- * Bảng customer - officer: 1-n
+ * Eloquent relationships One to One
+ * Bảng customer - individual: 1-1
  */
-class model_lecture13_officer extends Model
+class ModelLecture13Individual extends Model
 {
-    protected $table = 'officer';
-    protected $primaryKey = 'officer_id';
+    protected $table = 'individual';
+    protected $primaryKey = 'cust_id';
     protected $field = [
-        'officer_id',
-        'end_date',
+        'cust_id',
+        'birth_date',
         'first_name',
         'last_name',
-        'start_date',
-        'title',
-        'cust_id',
     ];
     public $timestamp = false;
 
@@ -38,6 +35,6 @@ class model_lecture13_officer extends Model
          *      foreignKey: tên khóa ngoại của bảng
          *      ownerKey: khoá chính của bảng cha
          */
-        return $this->belongsTo(model_lecture13_customer::class, 'cust_id', 'cust_id');
+        return $this->belongsTo(ModelLecture13Customer::class, 'cust_id', 'cust_id');
     }
 }

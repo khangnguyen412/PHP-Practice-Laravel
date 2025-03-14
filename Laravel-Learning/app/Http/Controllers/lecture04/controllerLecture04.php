@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\lecture04;
+namespace App\Http\Controllers\Lecture04;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
  * - destroy($id):Xóa một dữ liệu theo tham số truyền vào.
  */
 
-class controllerLecture04 extends Controller
+class ControllerLecture04 extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -104,10 +104,13 @@ class controllerLecture04 extends Controller
         return "got method destroy() have parameter $id from route::resource";
     }
 
-    public function testGroup($param = null)
+    /** Hàm Viết Thêm Route::resource sẽ không chấp nhận những phương này */
+    public function group($param = null)
     {
         if( $param != null ){
             return "test route group thành công và có đối số $param";
-        }else return view("lecture04.testRouteGroup");
+        }else {
+            return view("lecture04.test-route-group");
+        }
     }
 }

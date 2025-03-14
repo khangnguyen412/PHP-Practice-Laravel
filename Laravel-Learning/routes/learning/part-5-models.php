@@ -15,5 +15,5 @@ use Illuminate\Support\Facades\Route;
  *      - [model name] là tên của model được tạo
  *      - [sub folder] tên đường dẫn hoặc folder
  * 
- *  Khai báo các thông số tùy chỉnh: trong file ../app/Models/lecture11.php
+ *  Khai báo các thông số tùy chỉnh: trong file ../app/Models/Lecture11.php
  */

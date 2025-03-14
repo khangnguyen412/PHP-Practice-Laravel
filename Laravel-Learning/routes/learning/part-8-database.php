@@ -45,4 +45,5 @@ use Illuminate\Support\Facades\Schema;
  *      $ php artisan make:factory [đường-dẫn]/[tên-file-models]Factory --model=App\Models\[đường-dẫn]\[tên-file-models]
  *  - Sau cùng gọi class trong file DatabaseSeeder.php, chạy:
  *      $ php artisan db:seed
+ *  - Seeding của bảng pivot: xem trong Laravel-Learning/database/seeders/DatabaseSeederAcountLevel.php
  */
