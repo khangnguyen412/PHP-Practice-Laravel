@@ -10,7 +10,7 @@ class ControllerLecture18 extends Controller
 {
     public function get_form()
     {
-        return view('lecture18.view-lecture18');
+        return view('lecture18-19-20.view-lecture18');
     }
 
     public function handle_request(Request $request)
@@ -36,8 +36,35 @@ class ControllerLecture18 extends Controller
                      */
                     return $request->isMethod('post');
                     break;
+                case "show-path":
+                    /**
+                     *  Lấy path của form
+                     */
+                    return $request->path();
+                case "show-with-only":
+                    /**
+                     *  Trả về mỗi giá trị của key thuộc only
+                     */
+                    return $request->only(['username']);
+                    break;
+                case "show-with-input":
+                    /**
+                     *  Trả về mỗi giá trị của key với giá trị mặc đinh nếu field đó rỗng
+                     */
+                    return $request->input('city', 'default');
+                    break;
                 case "show-with-collection":
-                    return '';
+                    /**
+                     *  Kết hợp với collection();
+                     */
+                    $input = $request->collect();
+                    return $input->take(2)->toArray();
+                    break;
+                case "show-ip":
+                    /**
+                     *  Trả về IP request form
+                     */
+                    return $request->ip();
                     break;
                 default:
                     return "sai phương thức";

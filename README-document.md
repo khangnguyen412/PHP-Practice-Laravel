@@ -25,7 +25,7 @@ lecture04: routes2
 https://toidicode.com/route-trong-laravel-phan-2-4.html
 ghi chú bài học:
 - /route/web.php
-- /app/Http/Controllers/lecture04/testResourceRote.php
+- /app/Http/Controllers/Lecture04/testResourceRote.php
 
 ======================
 lecture05: routes3
@@ -60,7 +60,7 @@ lecture09: controller
 https://toidicode.com/controller-trong-laravel-10.html
 ghi chú bài học:
 - /route/web.php
-- /app/Http/Controllers/lecture09/controllerLecture09
+- /app/Http/Controllers/Lecture09/controllerLecture09
 
 ======================
 lecture10: Query Builder trong Laravel
@@ -85,7 +85,7 @@ check data exist: https://stackoverflow.com/questions/27095090/laravel-checking-
 ghi chú bài học:
 - /route/web.php
 - /app/Models/lecture11.php
-- /app/Http/Controllers/lecture12/lectureController12.php
+- /app/Http/Controllers/Lecture12/ControllerLecture12.php
 
 ======================
 lecture13: Các mối quan hệ (Relationships) trong Eloquent
@@ -94,15 +94,15 @@ https://toidicode.com/cac-moi-quan-he-relationships-trong-eloquent-14.html
 ghi chú bài học:
 - /route/web.php
 - /app/Models/modelLure13.php
-- /app/Http/Controllers/lecture12/lectureController13.php
+- /app/Http/Controllers/Lecture12/ControllerLecture13.php
 
 ======================
 lecture14: Collection trong Laravel
 https://toidicode.com/cac-moi-quan-he-relationships-trong-eloquent-15.html
 ghi chú bài học:
 - /routes/learning/part-7-collection.php
-- /app/Http/Controllers/lecture14/controllerLecture14.php
-- /app/Models/lecture12/modelLecture12.php
+- /app/Http/Controllers/Lecture14/controllerLecture14.php
+- /app/Models/lecture12/ModelLecture12.php
 
 ======================
 lecture15-16: Schema
@@ -118,3 +118,11 @@ https://toidicode.com/seeding-trong-laravel-18.html
 ghi chú bài học:
 - /routes/learning/part-8-database.php
 - /database/seeders
+
+======================
+lecture18: Form Request
+https://toidicode.com/seeding-trong-laravel-19.html
+ghi chú bài học:
+- /routes/learning/part-9-form-request.php
+- /app/Http/Controllers/Lecture18/controllerLecture18.php
+- /resources/views/lecture18/view-lecture18.php
