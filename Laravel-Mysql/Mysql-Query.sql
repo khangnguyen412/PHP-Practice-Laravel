@@ -1,3 +1,20 @@
+-- DROP TABLE IF EXISTS `acc_transaction`;
+-- DROP TABLE IF EXISTS `account`;
+-- DROP TABLE IF EXISTS `branch`;
+-- DROP TABLE IF EXISTS `business`;
+-- DROP TABLE IF EXISTS `customer`;
+-- DROP TABLE IF EXISTS `department`;
+-- DROP TABLE IF EXISTS `employee`;
+-- DROP TABLE IF EXISTS `individual`;
+-- DROP TABLE IF EXISTS `officer`;
+-- DROP TABLE IF EXISTS `product`;
+-- DROP TABLE IF EXISTS `product_type`;
+-- DROP TABLE IF EXISTS PersonCountry;
+-- DROP TABLE IF EXISTS Visa;
+-- DROP TABLE IF EXISTS Passport;
+-- DROP TABLE IF EXISTS Country;
+-- DROP TABLE IF EXISTS Person;
+
 create database laravelLearning;
 drop database laravelLearning;
 

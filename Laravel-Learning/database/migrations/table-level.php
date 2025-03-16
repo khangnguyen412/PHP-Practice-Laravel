@@ -16,6 +16,7 @@ return new class extends Migration {
          *  - Các thuộc tính của bảng: ./Laravel-Learning/routes/learning/part-8-schema-builder.php
          */
         Schema::create('level', function(Blueprint $table){
+            $table->engine = 'InnoDB'; // Thêm tham số này cấu hình bảng, để kết nối khóa ngoài lúc sử dụng host
             $table->id('level_id');
             $table->text('name')->nullable(false);
             $table->text('description')->nullable();
