@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use App\Http\Controllers\Lecture18\ControllerLecture18;
 use App\Http\Controllers\Lecture19\ControllerLecture19;
+use App\Http\Controllers\Lecture20\ControllerLecture20;
 
 /******************* lecture 18: Form Request  ****************************/
 /**
@@ -25,5 +26,8 @@ Route::post('/sent-upload-file', [ControllerLecture19::class, 'handle_upload_fil
 
 /******************* lecture 20: Validations  ****************************/
 /**
- *  
+ *  - Tạo rule validations
+ *  - Tham khảo các rule có sẳn: https://laravel.com/docs/9.x/validation#available-validation-rules
  */
+Route::get('/form-valid', [ControllerLecture20::class, 'get_form']);
+Route::post('/sent-valid', [ControllerLecture20::class, 'validations_form']);

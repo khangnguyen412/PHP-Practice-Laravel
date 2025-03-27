@@ -29,7 +29,7 @@
     <main>
         <div class="container sm:container md:container lg:container xl:container 2xl:container mx-auto p-4">
             <!-- enctype="multipart/form-data": mới gửi được file -->
-            <form action="/sent-upload-file" method="POST" enctype="multipart/form-data">
+            <form action="/sent-valid" method="POST" enctype="multipart/form-data">
                 <!-- Chống tấn công xss -->
                 <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
 
@@ -48,14 +48,14 @@
 
                     <!-- City field -->
                     <div class="mb-2">
+                        <label for="city" class="block text-gray-700 text-sm font-bold">Số Điện Thoại</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Nhập Số Điện Thoại" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" require />
+                    </div>
+                    
+                    <!-- City field -->
+                    <div class="mb-2">
                         <label for="city" class="block text-gray-700 text-sm font-bold">Thành Phố</label>
                         <input type="text" id="city" name="city" placeholder="Nhập Thành Phố" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" require />
-                    </div>
-
-                    <!-- Select field -->
-                    <div class="mb-2">
-                        <label for="upload" class="block text-gray-700 text-sm font-bold">Upload File</label>
-                        <input type="file" id="upload" name="upload" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
                     </div>
                 </div>
 
