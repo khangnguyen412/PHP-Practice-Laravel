@@ -125,4 +125,26 @@ https://toidicode.com/seeding-trong-laravel-19.html
 ghi chú bài học:
 - /routes/learning/part-9-form-request.php
 - /app/Http/Controllers/Lecture18/controllerLecture18.php
-- /resources/views/lecture18/view-lecture18.php
+- /resources/views/lecture18-19-20/view-lecture18.php
+
+======================
+lecture19: Upload files trong Laravel
+https://toidicode.com/upload-files-trong-laravel-43.html
+ghi chú bài học:
+- /routes/learning/part-9-form-request.php
+- /app/Http/Controllers/Lecture19/controllerLecture19.php
+- /resources/views/lecture18-19-20/view-lecture19.php
+
+======================
+lecture20: Validation trong Laravel
+https://toidicode.com/validation-trong-laravel-44.html
+ghi chú bài học:
+- /routes/learning/part-9-form-request.php
+- /app/Http/Controllers/Lecture20/controllerLecture20.php
+- /resources/views/lecture18-19-20/view-lecture20.php
+
+======================
+lecture21: Form Request Validation trong Laravel
+https://toidicode.com/validation-trong-laravel-44.html
+ghi chú bài học:
+- /routes/learning/part-9-form-request.php

@@ -21,6 +21,15 @@ class ControllerLecture20 extends Controller
          */
         /**
          *  - Các rule: 
+         *  + required: trường bắt buộc phải nhập.
+         *  + email: kiểm tra định dạng email hợp lệ.
+         *  + min:[value] và max:[value]: áp dụng cho chuỗi (độ dài ký tự) hoặc số (giá trị số).
+         *  + unique:table,column: kiểm tra giá trị phải là duy nhất trong bảng và cột được chỉ định.
+         *  + confirmed: yêu cầu trường xác nhận (ví dụ: password_confirmation) phải khớp với trường được xác nhận.
+         *  + integer, numeric, boolean: xác thực kiểu dữ liệu: số nguyên, số thực hoặc boolean.
+         *  + string: kiểm tra giá trị phải là chuỗi.
+         *  + date, before, after: xác thực định dạng ngày và so sánh ngày.
+         *  + nullable: cho phép trường đó có giá trị là null.
          */
         $valid_data = Validator::make(
             $request->all(),

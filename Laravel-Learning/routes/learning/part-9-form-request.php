@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 use App\Http\Controllers\Lecture18\ControllerLecture18;
 use App\Http\Controllers\Lecture19\ControllerLecture19;
 use App\Http\Controllers\Lecture20\ControllerLecture20;
+use App\Http\Controllers\Lecture21\ControllerLecture21;
 
 /******************* lecture 18: Form Request  ****************************/
 /**
@@ -31,3 +32,14 @@ Route::post('/sent-upload-file', [ControllerLecture19::class, 'handle_upload_fil
  */
 Route::get('/form-valid', [ControllerLecture20::class, 'get_form']);
 Route::post('/sent-valid', [ControllerLecture20::class, 'validations_form']);
+
+/******************* lecture 21: Form Request trong Validations  ****************************/
+/**
+ *  - Tạo Form Request trong Validations:
+ *      $ php artisan make:request [folder]/[file-name]
+ *  - Trong đó: 
+ *      [folder]: đường dẫn folder mà file đc tạo bắt đầu từ folder app/Http/Requests/
+ *      [file-name]: tên file
+ */
+Route::get('/form-request-valid', [ControllerLecture21::class, 'get_form']);
+Route::post('/sent-request-valid', [ControllerLecture21::class, 'validations_form_request']);

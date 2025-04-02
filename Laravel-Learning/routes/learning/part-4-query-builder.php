@@ -36,14 +36,10 @@ Route::get('/get-database', function () {
     // lấy bản test
     $data = DB::table('account')->get();
 
-    // hiển thị data ra màn hình
+    // cách 1: hiển thị data ra màn hình dưới dạng json
     header('Content-Type: application/json');
-
-    // cách 1:
-?>
-    <pre>data: <?php echo json_encode($data, JSON_PRETTY_PRINT); ?></pre>
-    <p> tìm thấy <?php echo sizeof($data); ?> kết quả của truy vấn</p>
-<?php
+    echo json_encode($data, JSON_PRETTY_PRINT)."\n";
+    echo "Tìm thấy: " . sizeof($data) . " kết quả của truy vấn\n";
 
     // cách 2:
     // echo "<pre>";
@@ -89,7 +85,7 @@ Route::get('/get-col-database', function () {
  *  * Lưu ý:
  *      - nếu không vế [condition] => mặc định sẽ chọn lọc kết quả = với [filter] phía sau
  *      - thứ tự của câu lệnh sql (table -> select -> where -> get)
- */ 
+ */
 Route::get('/get-database-with-condition', function () {
     // lấy data với điều kiện
     $data_with_condition = DB::table('account')
