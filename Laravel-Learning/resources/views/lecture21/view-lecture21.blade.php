@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="build/assets/styles.css">
+    <link href="{{ asset('build/assets/styles.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -28,42 +28,37 @@
 
     <main>
         <div class="container sm:container md:container lg:container xl:container 2xl:container mx-auto p-4">
-            <form action="/sent-request" method="POST">
+            <!-- enctype="multipart/form-data": mới gửi được file -->
+            <form action="/sent-request-valid" method="POST" enctype="multipart/form-data">
+                <!-- Ghi đè phương thức -->
+                @method('POST')
+
                 <!-- Chống tấn công xss -->
-                <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
+                @csrf
 
                 <div class="grid grid-cols-2 gap-2 mb-4">
                     <!-- Input field -->
                     <div class="mb-2">
                         <label for="username" class="block text-gray-700 text-sm font-bold">Họ và tên</label>
-                        <input type="text" id="username" name="username" placeholder="Nhập họ và tên" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" require/>
+                        <input type="text" id="username" name="username" placeholder="Nhập họ và tên" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" require />
                     </div>
 
                     <!-- Email field -->
                     <div class="mb-2">
                         <label for="email" class="block text-gray-700 text-sm font-bold">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Nhập email" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" require/>
+                        <input type="email" id="email" name="email" placeholder="Nhập email" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" require />
+                    </div>
+
+                    <!-- City field -->
+                    <div class="mb-2">
+                        <label for="city" class="block text-gray-700 text-sm font-bold">Số Điện Thoại</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Nhập Số Điện Thoại" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" require />
                     </div>
 
                     <!-- City field -->
                     <div class="mb-2">
                         <label for="city" class="block text-gray-700 text-sm font-bold">Thành Phố</label>
-                        <input type="text" id="city" name="city" placeholder="Nhập Thành Phố" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" require/>
-                    </div>
-
-                    <!-- Select field -->
-                    <div class="mb-2">
-                        <label for="category" class="block text-gray-700 text-sm font-bold">Danh mục</label>
-                        <select id="category" name="category" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="show-all">Show Toàn Bộ Data</option>
-                            <option value="show-name">Show Data Họ Và Tên</option>
-                            <option value="show-method">Kiểm Tra Phương Thức Gửi</option>
-                            <option value="show-path">Show Đường Dẫn</option>
-                            <option value="show-with-collection">Show Data Với Collection</option>
-                            <option value="show-with-only">Show Data Với Only</option>
-                            <option value="show-with-input">Show Data Với Input</option>
-                            <option value="show-ip">Show IP</option>
-                        </select>
+                        <input type="text" id="city" name="city" placeholder="Nhập Thành Phố" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" require />
                     </div>
                 </div>
 
@@ -81,7 +76,7 @@
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="build/assets/app.js"></script>
-<script src="build/assets/main.js"></script>
+<script src="{{ asset('build/assets/app.js') }}"></script>
+<script src="{{ asset('build/assets/main.js') }}"></script>
 
 </html>

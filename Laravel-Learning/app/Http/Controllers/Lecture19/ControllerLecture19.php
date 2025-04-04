@@ -10,7 +10,7 @@ class ControllerLecture19 extends Controller
 {
     public function get_form()
     {
-        return view('lecture18-19-20.view-lecture19');
+        return view('lecture19.view-lecture19');
     }
 
     public function handle_upload_file(Request $request)

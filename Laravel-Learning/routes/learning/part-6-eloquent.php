@@ -28,9 +28,9 @@ Route::get('/count-data-model-12', [ControllerLecture12::class, "count_data"]);
 // thêm dữ liệu vào bảng
 Route::get('/add-data-model-12', [ControllerLecture12::class, "add_data"]);
 // cập nhật dữ liệu trong bảng
-Route::get('/update-dataModel-12', [ControllerLecture12::class, "update_data"]);
+Route::get('/update-data-model-12', [ControllerLecture12::class, "update_data"]);
 // xóa dữ liệu trong bảng
-Route::get('/delete-dataModel-12', [ControllerLecture12::class, "delete_data"]);
+Route::get('/delete-data-model-12', [ControllerLecture12::class, "delete_data"]);
 
 /******************* lecture 13: Các mối quan hệ (Relationships) trong Eloquent ****************************/
 /**

@@ -10,7 +10,7 @@ class ControllerLecture18 extends Controller
 {
     public function get_form()
     {
-        return view('lecture18-19-20.view-lecture18');
+        return view('lecture18.view-lecture18');
     }
 
     public function handle_request(Request $request)
@@ -22,19 +22,23 @@ class ControllerLecture18 extends Controller
                     /**
                      *  Lấy dữ liệu của form
                      */
-                    return $request->all();
+                    $result = json_encode($request->all(), JSON_UNESCAPED_UNICODE);
+                    return response($result)->header('Content-type','application/json; charset=UTF-8'); 
                     break;
                 case "show-name":
                     /**
                      *  Lấy dữ liệu của field chỉ đinh
                      */
-                    return $request->get('name');
+                    $result = json_encode($request->get('username'), JSON_UNESCAPED_UNICODE);
+                    return response($result)->header('Content-type','application/json; charset=UTF-8'); 
                     break;
                 case "show-method":
                     /**
                      *  Kiểm tra phương thức gửi
                      */
-                    return $request->isMethod('post');
+                    if($request->isMethod('post')){
+                        return "Đây là phương thức post";
+                    }
                     break;
                 case "show-path":
                     /**
@@ -45,26 +49,29 @@ class ControllerLecture18 extends Controller
                     /**
                      *  Trả về mỗi giá trị của key thuộc only
                      */
-                    return $request->only(['username']);
+                    $result = json_encode($request->only(['username']), JSON_UNESCAPED_UNICODE);
+                    return response($result)->header('Content-type','application/json; charset=UTF-8'); 
                     break;
                 case "show-with-input":
                     /**
                      *  Trả về mỗi giá trị của key với giá trị mặc đinh nếu field đó rỗng
                      */
-                    return $request->input('city', 'default');
+                    $result = json_encode($request->input('city', 'HCM2'), JSON_UNESCAPED_UNICODE);
+                    return response($result)->header('Content-type','application/json; charset=UTF-8'); 
                     break;
                 case "show-with-collection":
                     /**
                      *  Kết hợp với collection();
                      */
                     $input = $request->collect();
-                    return $input->take(2)->toArray();
+                    $result = json_encode($input->take(2)->toArray(), JSON_UNESCAPED_UNICODE);
+                    return response($result)->header('Content-type','application/json; charset=UTF-8'); 
                     break;
                 case "show-ip":
                     /**
                      *  Trả về IP request form
                      */
-                    return $request->ip();
+                    return "IP: " . $request->ip();
                     break;
                 default:
                     return "sai phương thức";

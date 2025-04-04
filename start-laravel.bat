@@ -16,5 +16,5 @@ cd .\Laravel-Learning\
 :: docker-compose exec app php artisan migrate
 
 :: Khởi động project
-docker restart Laravel-App Laravel-Webserver
+docker restart Laravel-App Laravel-Webserver Laravel-Sql
 docker exec Laravel-App php artisan serve --host=0.0.0.0 --port=8000

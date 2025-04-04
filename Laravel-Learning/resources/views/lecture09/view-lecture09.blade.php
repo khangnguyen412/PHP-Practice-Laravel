@@ -10,12 +10,12 @@
 
 <body>
     <div class="container">
-        <pre>Data đã thêm:<?php echo json_encode($users, JSON_PRETTY_PRINT); ?></pre>
+        <pre>Data đã thêm:{{ json_encode($users, JSON_PRETTY_PRINT) }}</pre>
     </div>
     <div class="container"> Data sau khi đã xóa: <br>
-        <?php foreach ($users_after_delete as $item): ?>
-            <span><?php echo json_encode($item, JSON_PRETTY_PRINT) ?></span><br>
-        <?php endforeach; ?>
+        @foreach ($users_after_delete as $item)
+            <span>{{ json_encode($item, JSON_PRETTY_PRINT) }}</span><br>
+        @endforeach
     </div>
 </body>
 

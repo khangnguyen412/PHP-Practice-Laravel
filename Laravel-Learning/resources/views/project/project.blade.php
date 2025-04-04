@@ -83,6 +83,12 @@
     <main>
         <div class="container sm:container md:container lg:container xl:container 2xl:container mx-auto p-4">
             <form action="/video-38-submit" method="POST">
+                <!-- Ghi đè phương thức -->
+                @method('POST')
+
+                <!-- Chống tấn công xss -->
+                {{ csrf_field() }}
+
                 <!-- Input field -->
                 <div class="mb-4">
                     <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Họ và tên</label>

@@ -27,9 +27,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Lecture09\ControllerLecture09;
 // gọi tới controller có đường dẫn app/http/lecture09/lecture09.php và thực hiện hàm index
-Route::get('/call-controler', [ControllerLecture09::class, 'test_controller']);
+Route::get('/call-controller', [ControllerLecture09::class, 'test_controller']);
 // gọi tới hàm addDB trong controller 
-Route::get('/data-to-controler', [ControllerLecture09::class, 'add_db']);
+Route::get('/data-to-controller', [ControllerLecture09::class, 'add_db']);
 // truyền tham số {param} cho vào controler
 Route::get('/param-to-controller/{param}/', [ControllerLecture09::class, 'get_name']);
 // truyền tham số {param} cho vào controler kèm theo điều kiện regex

@@ -3,7 +3,6 @@
 /******************* Gọi Thư Viện ****************************/
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Schema;
 use App\Http\Controllers\Lecture18\ControllerLecture18;
 use App\Http\Controllers\Lecture19\ControllerLecture19;
 use App\Http\Controllers\Lecture20\ControllerLecture20;
