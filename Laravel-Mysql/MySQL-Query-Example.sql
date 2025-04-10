@@ -9,16 +9,15 @@
 -- DROP TABLE IF EXISTS `officer`;
 -- DROP TABLE IF EXISTS `product`;
 -- DROP TABLE IF EXISTS `product_type`;
--- DROP TABLE IF EXISTS PersonCountry;
--- DROP TABLE IF EXISTS Visa;
--- DROP TABLE IF EXISTS Passport;
--- DROP TABLE IF EXISTS Country;
--- DROP TABLE IF EXISTS Person;
+-- DROP TABLE IF EXISTS `account_level`;
+-- DROP TABLE IF EXISTS `level`;
+-- DROP TABLE IF EXISTS `migrations`;
 
-create database laravelLearning;
-drop database laravelLearning;
+-- create database ;
+-- drop database ;
 
--- truy xuất db mẫu
+-- truy xuất db mẫu (DB: Laravel-Mysql/MySQL-Database-Example.sql)
+select * from migrations;
 select * from acc_transaction;
 select * from account;
 select * from branch;
@@ -37,5 +36,6 @@ update account set STATUS = 'INACTIVE' where ACCOUNT_ID = 30;
 delete from account where ACCOUNT_ID = 30;
 select * from customer left join individual on customer.cust_id = individual.cust_id;
 select * from customer inner join officer on customer.cust_id = officer.cust_id;
+
 
 SET SQL_SAFE_UPDATES = 0;

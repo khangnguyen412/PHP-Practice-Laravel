@@ -4,6 +4,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB; // add thư viện kết nối DB vào
+use Barryvdh\Debugbar\Facades\Debugbar;
 
 /******************* lecture 10: query builder trong laravel ****************************/
 /**
@@ -34,11 +35,12 @@ use Illuminate\Support\Facades\DB; // add thư viện kết nối DB vào
  */
 Route::get('/get-database', function () {
     // lấy bản test
-    $data = DB::table('account')->get();
+    $data = DB::table('laravelweb_users')->get();
 
     // cách 1: hiển thị data ra màn hình dưới dạng json
+    Debugbar::disable(); // tắt debugbar
     header('Content-Type: application/json');
-    echo json_encode($data, JSON_PRETTY_PRINT)."\n";
+    echo json_encode($data, JSON_PRETTY_PRINT) . "\n";
     echo "Tìm thấy: " . sizeof($data) . " kết quả của truy vấn\n";
 
     // cách 2:
@@ -52,7 +54,6 @@ Route::get('/get-database', function () {
     // echo "</pre>"; 
 });
 
-
 /**
  *  - Lấy cột trong bảng
  *  Cú pháp:
@@ -62,14 +63,13 @@ Route::get('/get-database', function () {
  *      - [columnfirst], [columnsecond] các cột được truy vấn
  */
 Route::get('/get-col-database', function () {
-    $data = DB::table('account')->select('ACCOUNT_ID', 'AVAIL_BALANCE')->get();
+    $data = DB::table('laravelweb_users')->select('user_id', 'user_name', 'email')->get();
 
     // hiển thị data ra màn hình
+    Debugbar::disable();
     header('Content-Type: application/json');
-?>
-    <pre>lấy cột: <?php echo json_encode($data, JSON_PRETTY_PRINT); ?></pre>
-    <p> tìm thấy <?php echo sizeof($data); ?> kết quả của lấy cột</p>
-<?php
+    echo json_encode($data, JSON_PRETTY_PRINT) . "\n";
+    echo "Tìm thấy: " . sizeof($data) . " kết quả của truy vấn\n";
 });
 
 
@@ -87,47 +87,28 @@ Route::get('/get-col-database', function () {
  *      - thứ tự của câu lệnh sql (table -> select -> where -> get)
  */
 Route::get('/get-database-with-condition', function () {
-    // lấy data với điều kiện
-    $data_with_condition = DB::table('account')
-        ->select('ACCOUNT_ID', 'AVAIL_BALANCE', 'OPEN_BRANCH_ID', 'PRODUCT_CD')
-        ->where('AVAIL_BALANCE', '>', '5000')->get();
+    Debugbar::disable();
     header('Content-Type: application/json');
-?>
-    <pre>truy xuất data với điều kiện: <?php echo json_encode($data_with_condition, JSON_PRETTY_PRINT); ?></pre>
-    <p> tìm thấy <?php echo sizeof($data_with_condition); ?> kết quả của truy xuất data với điều kiện</p>
-    <?php
+
+    // lấy data với điều kiện
+    $data_with_condition = DB::table('laravelweb_users')->select('user_id', 'user_name', 'display_name', 'email')->where('user_id', '>', 3)->get();
+    echo "Truy xuất data vs điều kiện:" . json_encode($data_with_condition, JSON_PRETTY_PRINT) . "\n";
+    echo "Tìm thấy: " . sizeof($data_with_condition) . " kết quả của truy vấn\n\n\n";
 
     // lấy data với điều kiện lồng orwhere
-    $data_with_condition_or_where = DB::table('account')
-        ->select('ACCOUNT_ID', 'AVAIL_BALANCE', 'OPEN_BRANCH_ID')
-        ->where('AVAIL_BALANCE', '>', '5000')
-        ->orWhere('OPEN_BRANCH_ID', '=', '1')
-        ->get();
-    ?>
-    <pre>truy xuất data vs điều kiện lồng ->orwhere(): <?php echo json_encode($data_with_condition_or_where, JSON_PRETTY_PRINT); ?></pre>
-    <p> tìm thấy <?php echo sizeof($data_with_condition_or_where); ?> truy xuất data vs điều kiện lồng</p>
-    <?php
+    $data_with_condition_or_where = DB::table('laravelweb_products')->where('price', '>', '129.99')->orWhere('user_id', '>', 13)->get();
+    echo "Truy xuất data vs điều kiện lồng where()orwhere():" . json_encode($data_with_condition_or_where, JSON_PRETTY_PRINT) . "\n";
+    echo "Tìm thấy: " . sizeof($data_with_condition_or_where) . " kết quả của truy vấn\n\n\n";
 
     // lấy data với điều kiện lồng andwhere
-    $data_with_condition_and_where = DB::table('account')
-        ->select('ACCOUNT_ID', 'AVAIL_BALANCE', 'OPEN_BRANCH_ID')
-        ->where('AVAIL_BALANCE', '>', '5000')
-        ->Where('OPEN_BRANCH_ID', '=', '1')
-        ->get();
-    ?>
-    <pre>truy xuất data vs điều kiện lồng where()where(): <?php echo json_encode($data_with_condition_and_where, JSON_PRETTY_PRINT); ?></pre>
-    <p> tìm thấy <?php echo sizeof($data_with_condition_and_where); ?> truy xuất data vs điều kiện lồng</p>
-    <?php
+    $data_with_condition_and_where = DB::table('laravelweb_products')->where('price', '>', '100')->where('user_id', '=', 4)->get();
+    echo "Truy xuất data vs điều kiện lồng where()andwhere():" . json_encode($data_with_condition_and_where, JSON_PRETTY_PRINT) . "\n";
+    echo "Tìm thấy: " . sizeof($data_with_condition_and_where) . " kết quả của truy vấn\n\n\n";
 
     // lấy dữ liệu với điều kiện like
-    $data_with_condition_like = DB::table('account')
-        ->select('ACCOUNT_ID', 'AVAIL_BALANCE', 'OPEN_BRANCH_ID', 'PRODUCT_CD')
-        ->where('PRODUCT_CD', 'like', 'sa%')
-        ->get();
-    ?>
-    <pre>truy xuất data vs điều kiện like: <?php echo json_encode($data_with_condition_like, JSON_PRETTY_PRINT); ?></pre>
-    <p> tìm thấy <?php echo sizeof($data_with_condition_like); ?> truy xuất data vs điều kiện like</p>
-<?php
+    $data_with_condition_like = DB::table('laravelweb_users')->where('display_name', 'like', 'J%')->get();
+    echo "Truy xuất data vs điều kiện like: " . json_encode($data_with_condition_like, JSON_PRETTY_PRINT) . "\n";
+    echo "Tìm thấy: " . sizeof($data_with_condition_like) . " kết quả của truy vấn\n\n\n";
 });
 
 
@@ -142,17 +123,16 @@ Route::get('/get-database-with-condition', function () {
  *      - [filter] vế sau của điều kiện
  */
 Route::get('/get-database-with-join', function () {
-    $data_with_join = DB::table('account')->join('acc_transaction', 'account.ACCOUNT_ID', 'acc_transaction.ACCOUNT_ID')->get();
-?>
-    <pre>truy xuất data với join: <?php echo json_encode($data_with_join, JSON_PRETTY_PRINT); ?></pre>
-    <p> tìm thấy <?php echo sizeof($data_with_join); ?> kết quả của join</p>
-    <?php
+    Debugbar::disable();
+    header('Content-Type: application/json');
 
-    $data_with_left_join = DB::table('account')->leftJoin('acc_transaction', 'account.ACCOUNT_ID', 'acc_transaction.ACCOUNT_ID')->get();
-    ?>
-    <pre>truy xuất data với left join: <?php echo json_encode($data_with_left_join, JSON_PRETTY_PRINT); ?></pre>
-    <p> tìm thấy <?php echo sizeof($data_with_left_join); ?> truy xuất data với left join</p>
-<?php
+    $data_with_join = DB::table('laravelweb_products')->join('laravelweb_categories', 'laravelweb_products.category_id', 'laravelweb_categories.category_id')->get();
+    echo "Truy xuất data với join: " . json_encode($data_with_join, JSON_PRETTY_PRINT) . "\n";
+    echo "Tìm thấy: " . sizeof($data_with_join) . " kết quả của truy vấn\n\n\n";
+
+    $data_with_left_join = DB::table('laravelweb_products')->leftJoin('laravelweb_users', 'laravelweb_products.user_id', 'laravelweb_users.user_id')->get();
+    echo "Truy xuất data với left join: " . json_encode($data_with_left_join, JSON_PRETTY_PRINT) . "\n";
+    echo "Tìm thấy: " . sizeof($data_with_left_join) . " kết quả của truy vấn\n\n\n";
 });
 
 

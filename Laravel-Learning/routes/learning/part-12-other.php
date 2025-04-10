@@ -11,4 +11,7 @@ use App\Http\Controllers\Lecture26\ControllerLecture26;
  */
 Route::get('/test-debugbar', [ControllerLecture26::class, 'show_debug']);
 
-
+/******************* lecture 27: Debugbar ****************************/
+/**
+ *  - Skip do học thêm frontend framework
+ */

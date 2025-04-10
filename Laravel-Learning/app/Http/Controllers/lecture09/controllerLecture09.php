@@ -14,46 +14,32 @@ class ControllerLecture09 extends Controller
 {
     public function test_controller()
     {
-        echo "test success";
+        return "test success";
     }
 
-    public function get_name($name = NULL, $age = NULL)
+    public function get_name($name = NULL)
     {
-        ?>
-            <p>đầy là hàm getName() trong ControllerLecture09</p>
-        <?php
-        if ($name != Null && $age != NULL) {
-            ?>
-                <p> có tham số Name là <?php echo $name ?> và Age là <?php echo $age ?></p>
-            <?php
-        } elseif ($age == NULL) {
-            ?>
-                <p> có tham số Name là <?php echo $name ?> </p>
-            <?php
-        }
+        return view('lecture09.param-to-controller', ['name' => $name]);
     }
 
     public function add_db(): View
     {
         $data = [
-            'ACCOUNT_ID'   => 31,
-            'AVAIL_BALANCE'   => 6000,
-            'CLOSE_DATE'   => NULL,
-            'LAST_ACTIVITY_DATE'   => '2004-12-17',
-            'OPEN_DATE'   => '2004-12-15',
-            'PENDING_BALANCE'   => 6000,
-            'STATUS'   => 'ACTIVE',
-            'CUST_ID'   => 10,
-            'OPEN_BRANCH_ID'   => 1,
-            'OPEN_EMP_ID'   => 1,
-            'PRODUCT_CD'  => 'CD'
+            'user_name'   => 'mary_johnson',
+            'display_name'   => 'Mary Johnson',
+            'email'   => 'mary.johnson@example.com',
+            'password'   => 'hashed_password_11',
+            'address'   => '808 Poplar Ave',
+            'phone'   => '555-0111',
+            'created_at'   => now(),
+            'updated_at'   => now(),
         ];
-        DB::table('account')->insert( $data );
-        $users = DB::table('account')->where('ACCOUNT_ID', 31)->get(); // lấy tất cả dữ liệu từ database gán cho users 
-        
-        DB::table('account')->where('ACCOUNT_ID', 31)->delete();
-        $users_after_delete = DB::table('account')->get(); // clear dữ liệu
+        DB::table('laravelweb_users')->insert($data);
+        $users = DB::table('laravelweb_users')->get()->last(); // Lấy data cuối cùng (vừa add) từ database gán cho users 
 
-        return view('lecture09.view-lecture09', ['users' => $users, 'users_after_delete' => $users_after_delete]);
+        DB::table('laravelweb_users')->orderBy('user_id', 'desc')->limit(1)->delete();
+        $users_after_delete = DB::table('laravelweb_users')->get(); // clear dữ liệu
+
+        return view('lecture09.call-controller', ['users' => $users, 'users_after_delete' => $users_after_delete]);
     }
 }
