@@ -9,28 +9,28 @@ use Illuminate\Support\Facades\App;
 
 /**
  * Eloquent relationships Many to Many
- * Bảng account vs level: n-n
+ * Bảng Post vs Categories: n-n
  */
-class ModelLecture13Account extends Model
+class ModelLecture13Post extends Model
 {
     use HasFactory;
-    protected $table = 'account';
-    protected $primaryKey = 'account_id';
+    protected $table = 'laravelweb_posts';
+    protected $primaryKey = 'post_id';
     protected $field = [
-        'account_id',
-        'avail_balance',
-        'close_date',
-        'last_activity_date',
-        'open_date',
-        'status',
-        'cust_id',
-        'open_branch_id',
-        'open_emp_id',
-        'product_cd',
+        'title',
+        'slug',
+        'meta_title',
+        'meta_description',
+        'body',
+        'canonical_url',
+        'user_id',
+        'created_at',
+        'pupdated_at',
+
     ];
     public $timestamp = false;
 
-    public function level()
+    public function categories()
     {
         /**
          * belongsToMany($related, $table, $foreignKey, $relatedKey): quan hệ n - n
@@ -39,6 +39,6 @@ class ModelLecture13Account extends Model
          * $foreignKey: tên khóa ngoại của bảng n thứ 1
          * $relatedKey: tên khóa ngoại của bảng n thứ 2
          */
-        return $this->belongsToMany(ModelLecture13Level::class, 'account_level', 'account_id', 'level_id');
+        return $this->belongsToMany(ModelLecture13Categories::class, 'laravelweb_categories_posts', 'post_id', 'category_id');
     }
 }

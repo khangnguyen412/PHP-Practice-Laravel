@@ -22,6 +22,7 @@ return new class extends Migration {
         Schema::dropIfExists('laravelweb_tags_posts');
         Schema::dropIfExists('laravelweb_media');
         Schema::dropIfExists('laravelweb_users');
+        Schema::dropIfExists('laravelweb_user_profiles');
         Schema::dropIfExists('laravelweb_roles');
         Schema::dropIfExists('laravelweb_permissions');
         Schema::dropIfExists('laravelweb_model_has_permissions');
@@ -199,6 +200,21 @@ return new class extends Migration {
         });
 
         /**
+         *  - Bảng user_profiles
+         *  - Các mối liên hệ:
+         *      laravelweb_users(1-1)
+         */
+        Schema::create('laravelweb_user_profiles', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->id('profile_id');
+            $table->unsignedBigInteger('user_id')->unique(); // Đảm bảo 1-1
+            $table->string('bio')->nullable();
+            $table->string('avatar')->nullable();
+            $table->timestamps();
+            $table->foreign('user_id')->references('user_id')->on('laravelweb_users')->onDelete('cascade');
+        });
+
+        /**
          *  - Bảng roles
          *  - Các mối liên hệ:
          *      laravelweb_users (n-n)
@@ -331,6 +347,7 @@ return new class extends Migration {
         Schema::dropIfExists('laravelweb_tags_posts');
         Schema::dropIfExists('laravelweb_media');
         Schema::dropIfExists('laravelweb_users');
+        Schema::dropIfExists('laravelweb_user_profiles');
         Schema::dropIfExists('laravelweb_roles');
         Schema::dropIfExists('laravelweb_permissions');
         Schema::dropIfExists('laravelweb_model_has_permissions');

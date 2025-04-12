@@ -23,7 +23,7 @@ use Barryvdh\Debugbar\Facades\Debugbar;
  *      - [mật khẩu] mật khẩu để đăng nhập vào csdl 
  * 
  *  Lưu ý: để thực hiện các truy vấn, bắt buộc:
- *      - Kết nối với cơ sở dữ liệu.
+ *      - Kết nối với SQL.
  *      - Nếu truy vấn trong controllers thì các bạn cần phải khai báo use Illuminate\Support\Facades\DB; còn trong Route thì không cần.
  */
 /**
@@ -34,14 +34,16 @@ use Barryvdh\Debugbar\Facades\Debugbar;
  *      [table name] là tên bảng trong csdl
  */
 Route::get('/get-database', function () {
+    // tắt debugbar
+    Debugbar::disable(); 
+    
     // lấy bản test
     $data = DB::table('laravelweb_users')->get();
 
     // cách 1: hiển thị data ra màn hình dưới dạng json
-    Debugbar::disable(); // tắt debugbar
-    header('Content-Type: application/json');
-    echo json_encode($data, JSON_PRETTY_PRINT) . "\n";
-    echo "Tìm thấy: " . sizeof($data) . " kết quả của truy vấn\n";
+    // header('Content-Type: application/json');
+    // echo json_encode($data, JSON_PRETTY_PRINT) . "\n";
+    // echo "Tìm thấy: " . sizeof($data) . " kết quả của truy vấn\n";
 
     // cách 2:
     // echo "<pre>";
@@ -52,6 +54,13 @@ Route::get('/get-database', function () {
     // echo "<pre>"; 
     // var_dump($data);
     // echo "</pre>"; 
+    
+    // cách 4:
+    return response()->json([
+        'message'   => 'Truy xuất data',
+        'total'     => 'Tìm thấy: ' . sizeof($data) . " kết quả của truy vấn",
+        'data'      => $data,
+    ], 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 });
 
 /**
@@ -63,15 +72,17 @@ Route::get('/get-database', function () {
  *      - [columnfirst], [columnsecond] các cột được truy vấn
  */
 Route::get('/get-col-database', function () {
-    $data = DB::table('laravelweb_users')->select('user_id', 'user_name', 'email')->get();
+    Debugbar::disable();
 
     // hiển thị data ra màn hình
-    Debugbar::disable();
-    header('Content-Type: application/json');
-    echo json_encode($data, JSON_PRETTY_PRINT) . "\n";
-    echo "Tìm thấy: " . sizeof($data) . " kết quả của truy vấn\n";
-});
+    $data = DB::table('laravelweb_users')->select('user_id', 'user_name', 'email')->get();
 
+    return response()->json([
+        'message'   => 'Truy xuất data với Column',
+        'total'     => 'Tìm thấy: ' . sizeof($data) . " kết quả của truy vấn",
+        'data'      => $data,
+    ], 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+});
 
 /**
  *  - Lấy cột trong bảng với điều kiện
@@ -92,25 +103,31 @@ Route::get('/get-database-with-condition', function () {
 
     // lấy data với điều kiện
     $data_with_condition = DB::table('laravelweb_users')->select('user_id', 'user_name', 'display_name', 'email')->where('user_id', '>', 3)->get();
-    echo "Truy xuất data vs điều kiện:" . json_encode($data_with_condition, JSON_PRETTY_PRINT) . "\n";
-    echo "Tìm thấy: " . sizeof($data_with_condition) . " kết quả của truy vấn\n\n\n";
 
     // lấy data với điều kiện lồng orwhere
     $data_with_condition_or_where = DB::table('laravelweb_products')->where('price', '>', '129.99')->orWhere('user_id', '>', 13)->get();
-    echo "Truy xuất data vs điều kiện lồng where()orwhere():" . json_encode($data_with_condition_or_where, JSON_PRETTY_PRINT) . "\n";
-    echo "Tìm thấy: " . sizeof($data_with_condition_or_where) . " kết quả của truy vấn\n\n\n";
 
     // lấy data với điều kiện lồng andwhere
     $data_with_condition_and_where = DB::table('laravelweb_products')->where('price', '>', '100')->where('user_id', '=', 4)->get();
-    echo "Truy xuất data vs điều kiện lồng where()andwhere():" . json_encode($data_with_condition_and_where, JSON_PRETTY_PRINT) . "\n";
-    echo "Tìm thấy: " . sizeof($data_with_condition_and_where) . " kết quả của truy vấn\n\n\n";
 
-    // lấy dữ liệu với điều kiện like
+    // lấy bản ghi với điều kiện like
     $data_with_condition_like = DB::table('laravelweb_users')->where('display_name', 'like', 'J%')->get();
-    echo "Truy xuất data vs điều kiện like: " . json_encode($data_with_condition_like, JSON_PRETTY_PRINT) . "\n";
-    echo "Tìm thấy: " . sizeof($data_with_condition_like) . " kết quả của truy vấn\n\n\n";
-});
 
+    return response()->json([
+        'message'   => 'Truy xuất data với Condition',
+        'total'     => 'Tìm thấy: ' . sizeof($data_with_condition) . " kết quả của truy vấn",
+        'data'      => $data_with_condition,
+        'message'   => 'Truy xuất data với Condition OrWhere',
+        'total'     => 'Tìm thấy: ' . sizeof($data_with_condition_or_where) . " kết quả của truy vấn",
+        'data'      => $data_with_condition_or_where,
+        'message'   => 'Truy xuất data với Condition AndWhere',
+        'total'     => 'Tìm thấy: ' . sizeof($data_with_condition_and_where) . " kết quả của truy vấn",
+        'data'      => $data_with_condition_and_where,
+        'message'   => 'Truy xuất data với Condition Like',
+        'total'     => 'Tìm thấy: ' . sizeof($data_with_condition_like) . " kết quả của truy vấn",
+        'data'      => $data_with_condition_like,
+    ], 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+});
 
 /**
  *  - Join bảng 
@@ -124,17 +141,19 @@ Route::get('/get-database-with-condition', function () {
  */
 Route::get('/get-database-with-join', function () {
     Debugbar::disable();
-    header('Content-Type: application/json');
 
     $data_with_join = DB::table('laravelweb_products')->join('laravelweb_categories', 'laravelweb_products.category_id', 'laravelweb_categories.category_id')->get();
-    echo "Truy xuất data với join: " . json_encode($data_with_join, JSON_PRETTY_PRINT) . "\n";
-    echo "Tìm thấy: " . sizeof($data_with_join) . " kết quả của truy vấn\n\n\n";
-
     $data_with_left_join = DB::table('laravelweb_products')->leftJoin('laravelweb_users', 'laravelweb_products.user_id', 'laravelweb_users.user_id')->get();
-    echo "Truy xuất data với left join: " . json_encode($data_with_left_join, JSON_PRETTY_PRINT) . "\n";
-    echo "Tìm thấy: " . sizeof($data_with_left_join) . " kết quả của truy vấn\n\n\n";
-});
 
+    return response()->json([
+        'message'   => 'Truy xuất data với Join',
+        'total'     => 'Tìm thấy: ' . sizeof($data_with_join) . " kết quả của truy vấn",
+        'data'      => $data_with_join,
+        'message'   => 'Truy xuất data với Left Join',
+        'total'     => 'Tìm thấy: ' . sizeof($data_with_left_join) . " kết quả của truy vấn",
+        'data'      => $data_with_left_join,
+    ], 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+});
 
 /**
  *  - Unions
@@ -149,14 +168,15 @@ Route::get('/get-database-with-join', function () {
  *      - [filter] vế sau của điều kiện
  */
 Route::get('/get-database-with-unions', function () {
-    $first_data = DB::table('business')->select("CUST_ID", "STATE_ID")->where("CUST_ID", "10");
-    $second_data = DB::table('customer')->select("CUST_ID", "STATE")->where("CUST_ID", "11")->union($first_data)->get();
-?>
-    <pre>truy xuất data với unions: <?php echo json_encode($second_data, JSON_PRETTY_PRINT); ?></pre>
-    <p> tìm thấy <?php echo sizeof($second_data); ?> truy xuất data với unions</p>
-<?php
+    $first_data = DB::table('laravelweb_products')->select("product_id", "name")->where("product_id", "10");
+    $second_data = DB::table('laravelweb_product_meta')->select("product_id", "meta_key")->where("product_id", "10 ")->union($first_data)->get();
+    Debugbar::disable();
+    return response()->json([
+        'message'   => 'Truy xuất data với Unions',
+        'total'     => 'Tìm thấy: ' . sizeof($second_data) . " kết quả của truy vấn",
+        'data'      => $second_data
+    ], 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 });
-
 
 /**
  *  - Order by
@@ -168,26 +188,29 @@ Route::get('/get-database-with-unions', function () {
  *      - [desc/asc] lọc theo thứ tự (desc:giảm dần)(asc:tăng dần)
  */
 Route::get('/get-database-with-order-by', function () {
-    $data_with_orderby = DB::table('account')->select('*')->orderBy('PENDING_BALANCE', 'asc')->get();
-?>
-    <pre>truy xuất data với Order By: <?php echo json_encode($data_with_orderby, JSON_PRETTY_PRINT); ?></pre>
-    <p> tìm thấy <?php echo sizeof($data_with_orderby); ?> truy xuất data với Order By</p>
-<?php
+    $data_with_orderby = DB::table('laravelweb_products')->orderBy('price', 'asc')->get();
+    Debugbar::disable();
+    return response()->json([
+        'message'   => 'Truy xuất data với Order By',
+        'total'     => 'Tìm thấy: ' . sizeof($data_with_orderby) . " kết quả của truy vấn",
+        'data'      => $data_with_orderby
+    ], 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 });
 
-
 /**
- *  - Random
+ *  - Random: sắp xếp ngẫu nhiên và lấy phần tử đầu tiên
  *  Cú pháp:
  *      DB::table('[table name 1]')->inRandomOrder()->first();
  *  Trong đó: 
  *      - [table name 1] là tên bảng trong csdl
  */
 Route::get('/get-database-with-random', function () {
-    $data_with_random = DB::table('account')->inRandomOrder()->first();
-?>
-    <pre>truy xuất data với Random: <?php echo json_encode($data_with_random, JSON_PRETTY_PRINT); ?></pre>
-<?php
+    $data_with_random = DB::table('laravelweb_products')->inRandomOrder()->first();
+    Debugbar::disable();
+    return response()->json([
+        'message'   => 'Truy xuất data với Random',
+        'data'      => $data_with_random
+    ], 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 });
 
 /**
@@ -205,14 +228,13 @@ Route::get('/get-database-with-random', function () {
  *      - [variable] vế sau của điều kiện, có thể là 1 biến truyền vào
  */
 Route::get('/get-database-with-groupby-having', function () {
-    $data_with_groupby = DB::table('account')
-        ->selectRaw('sum(AVAIL_BALANCE) as "SUM AVAIL BALANCE", PRODUCT_CD')
-        ->groupBy('PRODUCT_CD')
-        ->havingRaw('sum(AVAIL_BALANCE) > ?', [10000])->get();
-?>
-    <pre>truy xuất data với Group By - Having: <?php echo json_encode($data_with_groupby, JSON_PRETTY_PRINT); ?></pre>
-    <p> tìm thấy <?php echo sizeof($data_with_groupby); ?> truy xuất data với Group By - Having</p>
-<?php
+    $data_with_groupby = DB::table('laravelweb_products')->selectRaw('sum(price) as "Total Price", category_id')->groupBy('category_id')->havingRaw('sum(price) > ?', [500])->get();
+    Debugbar::disable();
+    return response()->json([
+        'message'   => 'Truy xuất data với Group By - Having',
+        'total'     => 'Tìm thấy: ' . sizeof($data_with_groupby) . " kết quả của truy vấn",
+        'data'      => $data_with_groupby
+    ], 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 });
 
 /**
@@ -224,26 +246,41 @@ Route::get('/get-database-with-groupby-having', function () {
  *      - [key] tên cột
  *      - [value] giá trị
  */
-Route::get('/insertDB', function () {
-    $data = [
-        'ACCOUNT_ID'   => 30,
-        'AVAIL_BALANCE'   => 6000,
-        'CLOSE_DATE'   => NULL,
-        'LAST_ACTIVITY_DATE'   => '2004-12-17',
-        'OPEN_DATE'   => '2004-12-15',
-        'PENDING_BALANCE'   => 6000,
-        'STATUS'   => 'ACTIVE',
-        'CUST_ID'   => 10,
-        'OPEN_BRANCH_ID'   => 1,
-        'OPEN_EMP_ID'   => 1,
-        'PRODUCT_CD'  => 'CD'
-    ];
-    DB::table('account')->insert($data);
-    $data_insert = DB::table('account')->where('ACCOUNT_ID', '30')->get();
-?>
-    <p> Thêm Dữ Liệu Thành Công</p>
-    <pre>Dữ Liệu Vừa Thêm: <?php echo json_encode($data_insert, JSON_PRETTY_PRINT); ?></pre>
-<?php
+Route::get('/insert-database', function () {
+    Debugbar::disable();
+    try {
+        if (DB::table('laravelweb_products')->where('slug', 'iphone-16-pro-max')->exists()) {
+            $data_exists = DB::table('laravelweb_products')->where('slug', 'iphone-16-pro-max')->get();
+            return response()->json([
+                'message'       => 'Slug đã tồn tại',
+                'data_exists'   => $data_exists,
+            ], 400, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        }
+        $data = [
+            'name'                  => 'Iphone 16 pro max',
+            'slug'                  => 'iphone-16-pro-max',
+            'description'           => 'Smartphone for your life',
+            'price'                 => '1000',
+            'image'                 => 'iphone-16-pro-max.jpg',
+            'user_id'               => 1,
+            'category_id'           => 1,
+            'created_at'            => now(),
+            'updated_at'            => now(),
+        ];
+        DB::table('laravelweb_products')->insert($data);
+        $data_insert = DB::table('laravelweb_products')->orderBy('product_id', 'DESC')->get()->first();
+
+        return response()->json([
+            'message'   => 'Thêm bản ghi thành công',
+            'data'      => $data_insert
+        ], 201, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    } catch (Exception $e) {
+        return response()->json([
+            'code'      => 'Mã lỗi: ' . $e->getCode(),
+            'message'   => 'Thêm bản ghi thất bại: ' . $e->getMessage(),
+            'data'      => null
+        ], 500, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    }
 });
 
 /**
@@ -258,12 +295,29 @@ Route::get('/insertDB', function () {
  *      - [value] giá trị
  */
 Route::get('/update-database', function () {
-    DB::table('account')->where('ACCOUNT_ID', 30)->update(['STATUS' => 'INACTIVE']);
-    $data_update = DB::table('account')->where('ACCOUNT_ID', '30')->get();
-?>
-    <p> Cập Nhật Dữ Liệu Thành Công</p>
-    <pre>Dữ Liệu Vừa Cập Nhật: <?php echo json_encode($data_update, JSON_PRETTY_PRINT); ?></pre>
-<?php
+    Debugbar::disable();
+    try {
+        if (!DB::table('laravelweb_products')->where('slug', 'iphone-16-pro-max')->exists()) {
+            $data = DB::table('laravelweb_products')->get();
+            return response()->json([
+                'message'       => 'Bản ghi ko tồn tại',
+                'data'          => $data,
+            ], 404, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        }
+
+        DB::table('laravelweb_products')->where('slug', 'iphone-16-pro-max')->update(['price' => 1500]);
+        $data_update = DB::table('laravelweb_products')->get();
+        return response()->json([
+            'message'   => 'Cập nhật bản ghi thành công',
+            'data'      => $data_update
+        ], 201, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    } catch (Exception $e) {
+        return response()->json([
+            'code'      => 'Mã lỗi: ' . $e->getCode(),
+            'message'   => 'Cập nhật bản ghi thất bại: ' . $e->getMessage(),
+            'data'      => null
+        ], 500, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    }
 });
 
 /**
@@ -277,10 +331,26 @@ Route::get('/update-database', function () {
  *      - [filter] vế sau của điều kiện
  */
 Route::get('/delete-database', function () {
-    DB::table('account')->where('ACCOUNT_ID', 30)->delete();
-    $data_delete = DB::table('account')->where('ACCOUNT_ID', '>', '25')->get();
-?>
-    <p> Cập Nhật Dữ Liệu Thành Công</p>
-    <pre>Dữ Liệu Vừa Cập Nhật: <?php echo json_encode($data_delete, JSON_PRETTY_PRINT); ?></pre>
-<?php
+    Debugbar::disable();
+    try{
+        if (DB::table('laravelweb_products')->where('product_id', '>', 15)->count()>0) {
+            DB::table('laravelweb_products')->where('product_id', '>', 15)->delete();
+            $data_delete = DB::table('laravelweb_products')->get();
+            return response()->json([
+                'message'           => "Xóa thành công bản ghi",
+                'data'              => $data_delete,
+                'remaining_count'   => 'Số bản ghi còn lại: ' . sizeof($data_delete),
+            ], 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        };
+        return response()->json([
+            'message'   => 'Không tìm thấy bản ghi nào để xóa',
+            'data'      => DB::table('laravelweb_products')->get()
+        ], 404, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    }catch(Exception $e){
+        return response()->json([
+            'code'      => 'Mã lỗi: ' . $e->getCode(),
+            'message'   => 'Xóa bản ghi thất bại: ' . $e->getMessage(),
+            'data'      => null
+        ], 500, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    }
 });

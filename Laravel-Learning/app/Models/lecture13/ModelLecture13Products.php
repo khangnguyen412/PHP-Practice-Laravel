@@ -8,22 +8,27 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\App;
 
 /**
- * Eloquent relationships One to One
- * Bảng customer - individual: 1-1
+ * Eloquent relationships One to Many
+ * Bảng users - products: 1-n
  */
-class ModelLecture13Individual extends Model
+class ModelLecture13Products  extends Model
 {
-    protected $table = 'individual';
-    protected $primaryKey = 'cust_id';
+    protected $table = 'laravelweb_products';
+    protected $primaryKey = 'product_id';
     protected $field = [
-        'cust_id',
-        'birth_date',
-        'first_name',
-        'last_name',
+        'name',
+        'slug',
+        'description',
+        'price',
+        'image',
+        'user_id',
+        'category_id',
+        'created_at',
+        'updated_at',
     ];
     public $timestamp = false;
 
-    public function customer()
+    public function users()
     {
         /**
          * - Quan hệ 1 - n:
@@ -35,6 +40,6 @@ class ModelLecture13Individual extends Model
          *      foreignKey: tên khóa ngoại của bảng
          *      ownerKey: khoá chính của bảng cha
          */
-        return $this->belongsTo(ModelLecture13Customer::class, 'cust_id', 'cust_id');
+        return $this->belongsTo(ModelLecture13Users::class, 'user_id', 'user_id');
     }
 }

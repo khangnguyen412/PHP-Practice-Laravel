@@ -9,28 +9,27 @@ use Illuminate\Support\Facades\App;
 
 /**
  * Eloquent relationships One to One
- * Bảng person vs passport: 1-1
+ * Bảng users vs user_profiles: 1-1
  */
-class ModelLecture13Customer extends Model
+class ModelLecture13Users extends Model
 {
-    protected $table = 'customer';
-    protected $primaryKey = 'cust_id'; // thêm tham số này nếu gặp lỗi: Unknown column 'customer.id' in 'on clause' vì mặc định tên cột là id
+    protected $table = 'laravelweb_users';
     /**
-     * Mặc định primary key là id
-     * => nếu muốn thay đổi tên => set up lại $primaryKey cho class
+     *  - Mặc định primary key là id => nếu muốn thay đổi tên => set up lại $primaryKey cho class
+     *  - Thêm tham số $primaryKey nếu gặp lỗi: Unknown column 'laravelweb_users.user_id' in 'on clause' vì mặc định tên cột là id
      */
+    protected $primaryKey = 'user_id'; // 
     protected $field = [
-        'cust_id',
+        'user_name',
+        'display_name',
+        'email',
+        'password',
         'address',
-        'city',
-        'cust_type_cd',
-        'fed_id',
-        'postal_code',
-        'state'
+        'phone ',
     ];
     public $timestamp = false;
 
-    public function individual()
+    public function user_profiles()
     {
         /**
          * - Quan hệ 1 - 1:
@@ -42,10 +41,10 @@ class ModelLecture13Customer extends Model
          *      foreignKey: tên khóa ngoại của bảng
          *      localKey: khoá chính của bảng
          */
-        return $this->hasOne(ModelLecture13Individual::class, 'cust_id', 'cust_id');
+        return $this->hasOne(ModelLecture13UserProfiles::class, 'user_id', 'user_id');
     }
 
-    public function officer()
+    public function products()
     {
         /**
          * - Quan hệ 1 - n:
@@ -57,6 +56,6 @@ class ModelLecture13Customer extends Model
          *      foreignKey: tên khóa ngoại của bảng
          *      localKey: khoá chính của bảng
          */
-        return $this->hasMany(ModelLecture13Officer::class, 'cust_id', 'cust_id');
+        return $this->hasMany(ModelLecture13Products::class, 'user_id', 'user_id');
     }
 }

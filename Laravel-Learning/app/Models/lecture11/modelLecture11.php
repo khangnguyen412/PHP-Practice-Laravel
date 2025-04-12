@@ -9,18 +9,35 @@ class ModelLecture11 extends Model
 {
     use HasFactory;
 
-    // Khai báo các bảng được sử dụng trong model
-    protected $accountTable = 'account';
-
     /**
-     * Khai báo lọc cột dữ liệu: 
-     * - Chỉ lấy những thông số cần truy xuất trên một bảng
+     *  Khai báo các bảng được sử dụng trong model
      */
-    protected $fillable = ['ACCOUNT_ID', 'AVAIL_BALANCE', 'CLOSE_DATE'];
+    // 
+    protected $table = 'laravelweb_users';
 
     /**
-     * Khai báo timestamps
-     * - Cho phép laravel tự động cập nhật các cột 'created_at' và 'updated_at'
+     *  Khai báo khóa chính (nêu tên khóa chính ko phải id)
+     */
+    protected $primaryKey = 'user_id';
+
+    /**
+     *  Khai báo lọc cột dữ liệu: 
+     *  - Chỉ lấy những thông số cần truy xuất trên một bảng
+     */
+    protected $fillable = [
+        'user_name',
+        'display_name',
+        'email',
+        'password',
+        'address',
+        'phone',
+        'created_at',
+        'updated_at'
+    ];
+
+    /**
+     *  Khai báo timestamps
+     *  - Cho phép laravel tự động cập nhật các cột 'created_at' và 'updated_at'
      */
     public $timestamps = true;
 }

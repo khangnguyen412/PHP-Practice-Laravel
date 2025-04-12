@@ -9,25 +9,25 @@ use Illuminate\Support\Facades\App;
 
 /**
  * Eloquent relationships Many to Many
- * Bảng account vs level: n-n
+ * Bảng Post vs Categories: n-n
  */
-class ModelLecture13Level extends Model
+class ModelLecture13Categories extends Model
 {
     use HasFactory; // Sử dụng hasfactory để tự động dump db
-    protected $table = 'level';
-    protected $primaryKey = 'level_id';
+    protected $table = 'laravelweb_categories';
+    protected $primaryKey = 'category_id';
     protected $field = [
-        'level_id',
-        'address',
-        'city',
-        'cust_type_cd',
-        'fed_id',
-        'postal_code',
-        'state'
+        'name',
+        'post_type',
+        'slug',
+        'meta_title',
+        'meta_description',
+        'created_at',
+        'updated_at'
     ];
     public $timestamp = false;
 
-    public function account()
+    public function posts()
     {
         /**
          * belongsToMany($related, $table, $foreignKey, $relatedKey): quan hệ n - n
@@ -36,6 +36,6 @@ class ModelLecture13Level extends Model
          * $foreignKey: tên khóa ngoại của bảng n thứ 1
          * $relatedKey: tên khóa ngoại của bảng n thứ 2
          */
-        return $this->belongsToMany(ModelLecture13Account::class, 'account_level', 'level_id', 'account_id');
+        return $this->belongsToMany(ModelLecture13Post::class, 'laravelweb_categories_posts', 'post_id', 'category_id');
     }
 }

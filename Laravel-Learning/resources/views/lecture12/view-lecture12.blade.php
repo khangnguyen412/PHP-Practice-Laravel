@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    @include('asset.css')
 </head>
 
 <body>
-    <pre>Kết Quả: {{ json_encode($data, JSON_PRETTY_PRINT) }} </pre>
+    @include('partials.header')
+
+    <pre>Kết Quả: {{ json_encode($data, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE) }} </pre>
     @if ($_SERVER['REQUEST_URI'] == '/add-data-model-12' && $data == 'user exist')
         <script>
             setTimeout(function() {
@@ -27,6 +30,9 @@
             }, 5000); // sau 5 giây tự động redirect về
         </script>
     @endif
+
+    @include('partials.footer')
 </body>
 
+@include('asset.script')
 </html>

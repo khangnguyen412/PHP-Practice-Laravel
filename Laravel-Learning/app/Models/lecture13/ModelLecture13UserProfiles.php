@@ -8,25 +8,23 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\App;
 
 /**
- * Eloquent relationships One to Many
- * Bảng customer - officer: 1-n
+ * Eloquent relationships One to One
+ * Bảng users vs user_profiles: 1-1
  */
-class ModelLecture13Officer extends Model
+class ModelLecture13UserProfiles extends Model
 {
-    protected $table = 'officer';
-    protected $primaryKey = 'officer_id';
+    protected $table = 'laravelweb_user_profiles';
+    protected $primaryKey = 'profile_id';
     protected $field = [
-        'officer_id',
-        'end_date',
-        'first_name',
-        'last_name',
-        'start_date',
-        'title',
-        'cust_id',
+        'user_id',
+        'bio',
+        'avatar',
+        'created_at',
+        'updated_at',
     ];
     public $timestamp = false;
 
-    public function customer()
+    public function users()
     {
         /**
          * - Quan hệ 1 - n:
@@ -38,6 +36,6 @@ class ModelLecture13Officer extends Model
          *      foreignKey: tên khóa ngoại của bảng
          *      ownerKey: khoá chính của bảng cha
          */
-        return $this->belongsTo(ModelLecture13Customer::class, 'cust_id', 'cust_id');
+        return $this->belongsTo(ModelLecture13Users::class, 'user_id', 'user_id');
     }
 }

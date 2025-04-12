@@ -20,8 +20,13 @@
 -- drop database ;
 
 -- truy xuất db mẫu (DB: Laravel-Mysql/MySQL-Database-Rework.sql)
-select * from laravelweb_categories_posts;
-select * from laravelweb_users lu ;
+SELECT * FROM laravelweb_categories_posts;
+SELECT * FROM laravelweb_users lu ;
 SELECT * FROM laravelweb_products LEFT JOIN laravelweb_users ON laravelweb_products.user_id = laravelweb_users.user_id;
+SELECT * FROM laravelweb_products JOIN laravelweb_categories ON laravelweb_products.category_id = laravelweb_categories.category_id;
+SELECT * FROM laravelweb_product_meta WHERE product_id = 10;
+SELECT * FROM laravelweb_products WHERE product_id = 10;
+SELECT product_id, name FROM laravelweb_products WHERE product_id = 10 UNION SELECT product_id, meta_key FROM laravelweb_product_meta WHERE product_id = 10;
+SELECT sum(price) as "Total Price", category_id FROM laravelweb_products Group By category_id Having `Total Price` > 1000;
 
 SET SQL_SAFE_UPDATES = 0;

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Lecture14;
 
 use App\Http\Controllers\Controller;
 use App\Models\lecture12\ModelLecture12;
-use Illuminate\Support\Collection; // Gọi thư viện collection
+use App\Models\lecture13\ModelLecture13Products;
 
 class ControllerLecture14 extends Controller
 {
@@ -37,7 +37,11 @@ class ControllerLecture14 extends Controller
     {
         $arr = ['Name' => 'Quốc Khang', 'Phone' => '0973626954', 'Age' => '25'];
         $collection = collect($arr)->except(["Phone"]);
-        return $collection->toJson(JSON_UNESCAPED_UNICODE); // JSON_UNESCAPED_UNICODE: định dạng utf8
+        /**
+         *  JSON_UNESCAPED_UNICODE: định dạng utf8
+         *  JSON_PRETTY_PRINT: định dạng json
+         */
+        return response()->json($collection, 200, [], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
     /**
@@ -75,10 +79,10 @@ class ControllerLecture14 extends Controller
      */
     public function collection_sort_by()
     {
-        $arr = ModelLecture12::get();
-        $collection = collect($arr)->sortBy('Age');
+        $arr = ModelLecture13Products::get();
+        $collection = collect($arr)->sortBy('price');
         $collection = $collection->values(); // reset lại các key của mãng [9=>'', 4=>'', 5=>''] => [0=>'', 1=>'', 2=>'']
-        return $collection->toJson(JSON_UNESCAPED_UNICODE);
+        return response()->json($collection, 200, [], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
     /**
@@ -87,32 +91,33 @@ class ControllerLecture14 extends Controller
     public function collection_sort_by_desc()
     {
         $arr = ModelLecture12::get();
-        $collection = collect($arr)->sortByDesc('account_id');
+        $collection = collect($arr)->sortByDesc('user_id');
         $collection = $collection->values();
-        return $collection->toJson(JSON_UNESCAPED_UNICODE);
+        return response()->json($collection, 200, [], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
     /**
      *  Lấy phần tử trong mãng
      */
-    public function collection_take(){
+    public function collection_take()
+    {
         $arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         $collection = collect($arr)->take(2);
         $collection = $collection->values();
         $collection_desc = collect($arr)->take(-2);
         $collection_desc = $collection_desc->values();
-        return $collection.$collection_desc;
+        return $collection . $collection_desc;
     }
-    
+
     /**
      *  So sánh phần tử trong mãng
      */
-    public function collection_diff(){
+    public function collection_diff()
+    {
         $arr = [1, 2, 4, 5, 6, 7, 9, 10];
         $arr2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 12];
         $collection = collect($arr)->diff($arr2);
         $collection->values()->all();
         return $collection;
     }
-
 }

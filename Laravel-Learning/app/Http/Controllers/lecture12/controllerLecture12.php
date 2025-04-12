@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 // Gọi namespace của model
 use App\Models\lecture12\ModelLecture12;
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Support\Facades\Redirect;
 
 class ControllerLecture12 extends Controller
@@ -14,7 +15,7 @@ class ControllerLecture12 extends Controller
     public function test()
     {
         $get_function = new ModelLecture12(); // Khai báo model trong controller 
-        $get_first_models = $get_function->getFormModel(); // Gọi getInfo() từ models
+        $get_first_models = $get_function->get_info(); // Gọi get_info() từ models
         return $get_first_models;
     }
 
@@ -27,8 +28,8 @@ class ControllerLecture12 extends Controller
     public function get_data()
     {
         $data = ModelLecture12::all();
-        return view('lecture12.view-lecture12', ['data' => $data]);
-
+        Debugbar::disable();
+        return response()->json(['data' => $data], 200, [], JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -59,7 +60,7 @@ class ControllerLecture12 extends Controller
      */
     public function get_by_condition()
     {
-        $data = ModelLecture12::where('ACCOUNT_ID', 5)->get();
+        $data = ModelLecture12::where('user_id', 5)->get();
         return view('lecture12.view-lecture12', ['data' => $data]);
     }
 
@@ -71,7 +72,7 @@ class ControllerLecture12 extends Controller
      */
     public function get_by_column()
     {
-        $data = ModelLecture12::select('ACCOUNT_ID', 'AVAIL_BALANCE', 'LAST_ACTIVITY_DATE', 'PRODUCT_CD')->get();
+        $data = ModelLecture12::select('user_id', 'user_name', 'display_name', 'email')->get();
         return view('lecture12.view-lecture12', ['data' => $data]);
     }
 
@@ -92,22 +93,19 @@ class ControllerLecture12 extends Controller
      */
     public function add_data(Request $request)
     {
-        $data = ModelLecture12::find(30);
+        $data = ModelLecture12::firstWhere('email', 'phuonghoanglun@gmail.com');
         if ($data != NULL) {
             $data =  "user exist";
         } else {
             $data = new ModelLecture12();
-            $data->ACCOUNT_ID = '30';
-            $data->AVAIL_BALANCE = 6001;
-            $data->CLOSE_DATE = NULL;
-            $data->LAST_ACTIVITY_DATE = '2004-12-17';
-            $data->OPEN_DATE = '2004-12-15';
-            $data->PENDING_BALANCE = 6000;
-            $data->STATUS = 'ACTIVE';
-            $data->CUST_ID = 10;
-            $data->OPEN_BRANCH_ID = 1;
-            $data->OPEN_EMP_ID = 1;
-            $data->PRODUCT_CD = 'CD';
+            $data->user_name    = 'Khangnguyen';
+            $data->display_name = 'khang nguyễn';
+            $data->email        = 'phuonghoanglun@gmail.com';
+            $data->password     = 'khang412';
+            $data->address      = 'Lạc Long Quân';
+            $data->phone        = '0973626954';
+            $data->created_at   = now();
+            $data->updated_at   = now();
             $data->save();
         }
         return view('lecture12.view-lecture12', ['data' => $data]);
@@ -118,9 +116,9 @@ class ControllerLecture12 extends Controller
      */
     public function update_data(Request $request)
     {
-        $data = ModelLecture12::find(30);
+        $data = ModelLecture12::firstWhere('email', 'phuonghoanglun@gmail.com');
         if ($data != NULL) {
-            $data->AVAIL_BALANCE = 6002;
+            $data->phone = '0973626955';
             $data->save();
         }else{
             $data = "user doesn't exist";
@@ -133,7 +131,7 @@ class ControllerLecture12 extends Controller
      */
     public function delete_data(Request $request)
     {
-        $data = ModelLecture12::find(30);
+        $data = ModelLecture12::firstWhere('email', 'phuonghoanglun@gmail.com');
         if ($data != NULL) {
             $data->delete();
             $data = ModelLecture12::all();

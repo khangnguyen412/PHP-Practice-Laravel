@@ -265,4 +265,16 @@ INSERT INTO laravelweb_product_meta (product_id, meta_key, meta_value, created_a
 (14, 'color', 'red', NOW(), NOW()),
 (15, 'color', 'white', NOW(), NOW());
 
+INSERT INTO laravelweb_user_profiles (user_id, bio, avatar, created_at, updated_at) VALUES
+(1, 'I am a tech enthusiast and love coding.', 'john_doe_avatar.jpg', NOW(), NOW()),
+(2, 'Passionate about writing and lifestyle blogging.', 'jane_smith_avatar.jpg', NOW(), NOW()),
+(3, 'Health and fitness coach with a love for travel.', 'alice_jones_avatar.jpg', NOW(), NOW()),
+(4, 'Business owner and entrepreneur.', 'bob_brown_avatar.jpg', NOW(), NOW()),
+(5, 'Fashion lover and content creator.', 'emma_wilson_avatar.jpg', NOW(), NOW()),
+(6, 'Educator and lifelong learner.', 'david_martin_avatar.jpg', NOW(), NOW()),
+(7, 'Manager with a focus on business growth.', 'sarah_moore_avatar.jpg', NOW(), NOW()),
+(8, 'Tech support specialist and movie buff.', 'mike_taylor_avatar.jpg', NOW(), NOW()),
+(9, 'Data analyst with a passion for sports.', 'lisa_white_avatar.jpg', NOW(), NOW()),
+(10, 'Avid reader and guest contributor.', 'chris_green_avatar.jpg', NOW(), NOW());
+
 SET SQL_SAFE_UPDATES = 0;
