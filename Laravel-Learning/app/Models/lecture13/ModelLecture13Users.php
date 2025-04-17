@@ -25,7 +25,7 @@ class ModelLecture13Users extends Model
         'email',
         'password',
         'address',
-        'phone ',
+        'phone',
     ];
     public $timestamp = false;
 

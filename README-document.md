@@ -134,7 +134,8 @@ ghi chú bài học:
 
 ======================
 lecture22 23 24: Authentication trong Laravel
-- Tạm thời skip do database ko có bảng user
+ghi chú bài học:
+- /routes/learning/part-10-authentication.php
 
 ======================
 lecture25: Middleware trong Laravel
