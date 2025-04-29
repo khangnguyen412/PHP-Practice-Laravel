@@ -5,6 +5,7 @@ services:
     # image: php:8.2-fpm # cấu hình theo version php source đang chạy
     build: .
     container_name: Laravel-App
+    restart: always
     working_dir: /var/www
     volumes:
       - .:/var/www 
@@ -19,6 +20,7 @@ services:
   webserver:
     image: nginx:alpine
     container_name: Laravel-Webserver
+    restart: always
     ports:
       - "80:80"
     volumes:

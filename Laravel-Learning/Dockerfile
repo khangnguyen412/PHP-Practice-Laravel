@@ -11,7 +11,7 @@ RUN docker-php-ext-install pdo_mysql mbstring zip
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Cài đặt nodejs
-RUN curl -sL https://deb.nodesource.com/setup_current.x | bash - && apt-get install -y nodejs
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs
 
 # Copy file composer.json và composer.lock (nếu có) để cài đặt composer dependencies sớm hơn
 COPY composer.json composer.lock ./
@@ -21,6 +21,9 @@ RUN composer install --no-scripts --no-autoloader
 
 # Cop file package vào workdir của docker
 COPY package*.json ./
+
+# Xóa node_modules và package-lock.json rồi cài lại
+RUN rm -rf node_modules package-lock.json
 
 # Cài đặt các package của Node
 RUN npm install
