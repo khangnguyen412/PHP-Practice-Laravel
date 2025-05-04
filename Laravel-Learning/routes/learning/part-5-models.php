@@ -4,7 +4,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-/******************* lecture 11: Model trong Laravel ****************************/
+/******************* Lecture 11: Model trong Laravel ****************************/
 /**
  *  Model được dặt ở trong thư mục /app
  * 

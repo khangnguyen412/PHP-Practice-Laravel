@@ -4,9 +4,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-// controller nằm trong đường dẫn: app/http
+// Controller nằm trong đường dẫn: app/http
 
-/******************* lecture 9: controller trong laravel ****************************/
+/******************* Lecture 9: Controller trong laravel ****************************/
 /**
  *  Tạo thư mục phụ trong controler:
  *  - Trường hợp có file sẵn cấu trúc lại:
@@ -26,12 +26,12 @@ use Illuminate\Support\Facades\Route;
  */
 
 use App\Http\Controllers\Lecture09\ControllerLecture09;
-// gọi tới controller có đường dẫn app/http/lecture09/lecture09.php và thực hiện hàm index
+// Gọi tới controller có đường dẫn app/http/lecture09/lecture09.php và thực hiện hàm index
 Route::get('/call-controller', [ControllerLecture09::class, 'test_controller']);
-// gọi tới hàm addDB trong controller 
+// Gọi tới hàm addDB trong controller 
 Route::get('/data-to-controller', [ControllerLecture09::class, 'add_db']);
-// truyền tham số {param} cho vào controler
+// Truyền tham số {param} cho vào controler
 Route::get('/param-to-controller/{param}/', [ControllerLecture09::class, 'get_name']);
-// truyền tham số {param} cho vào controler kèm theo điều kiện regex
-// điều kiện sai => kết quả NOT FOUND
+// Truyền tham số {param} cho vào controler kèm theo điều kiện regex
+// Điều kiện sai => kết quả NOT FOUND
 Route::get('/param-to-controller-with-condition/{param}/', [ControllerLecture09::class, 'get_name'])->where(['param' => '[a-zA-Z]+']);

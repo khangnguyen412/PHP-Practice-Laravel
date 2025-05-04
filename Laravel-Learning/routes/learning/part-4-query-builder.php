@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB; // add thư viện kết nối DB vào
 use Barryvdh\Debugbar\Facades\Debugbar;
 
-/******************* lecture 10: query builder trong laravel ****************************/
+/******************* Lecture 10: Query builder trong laravel ****************************/
 /**
  *  Cấu hình lại kết nối csdl trong file .env các dòng sau: 
  *  DB_CONNECTION=mysql
@@ -34,28 +34,28 @@ use Barryvdh\Debugbar\Facades\Debugbar;
  *      [table name] là tên bảng trong csdl
  */
 Route::get('/get-database', function () {
-    // tắt debugbar
+    // Tắt debugbar
     Debugbar::disable(); 
     
-    // lấy bản test
+    // Lấy bản test
     $data = DB::table('laravelweb_users')->get();
 
-    // cách 1: hiển thị data ra màn hình dưới dạng json
+    // Cách 1: hiển thị data ra màn hình dưới dạng json
     // header('Content-Type: application/json');
     // echo json_encode($data, JSON_PRETTY_PRINT) . "\n";
     // echo "Tìm thấy: " . sizeof($data) . " kết quả của truy vấn\n";
 
-    // cách 2:
+    // Cách 2:
     // echo "<pre>";
     // echo json_encode($data, JSON_PRETTY_PRINT);
     // echo "</pre>";
 
-    // cách 3:
+    // Cách 3:
     // echo "<pre>"; 
     // var_dump($data);
     // echo "</pre>"; 
     
-    // cách 4:
+    // Cách 4:
     return response()->json([
         'message'   => 'Truy xuất data',
         'total'     => 'Tìm thấy: ' . sizeof($data) . " kết quả của truy vấn",
@@ -74,7 +74,7 @@ Route::get('/get-database', function () {
 Route::get('/get-col-database', function () {
     Debugbar::disable();
 
-    // hiển thị data ra màn hình
+    // Hiển thị data ra màn hình
     $data = DB::table('laravelweb_users')->select('user_id', 'user_name', 'email')->get();
 
     return response()->json([
@@ -101,16 +101,16 @@ Route::get('/get-database-with-condition', function () {
     Debugbar::disable();
     header('Content-Type: application/json');
 
-    // lấy data với điều kiện
+    // Lấy data với điều kiện
     $data_with_condition = DB::table('laravelweb_users')->select('user_id', 'user_name', 'display_name', 'email')->where('user_id', '>', 3)->get();
 
-    // lấy data với điều kiện lồng orwhere
+    // Lấy data với điều kiện lồng orwhere
     $data_with_condition_or_where = DB::table('laravelweb_products')->where('price', '>', '129.99')->orWhere('user_id', '>', 13)->get();
 
-    // lấy data với điều kiện lồng andwhere
+    // Lấy data với điều kiện lồng andwhere
     $data_with_condition_and_where = DB::table('laravelweb_products')->where('price', '>', '100')->where('user_id', '=', 4)->get();
 
-    // lấy bản ghi với điều kiện like
+    // Lấy bản ghi với điều kiện like
     $data_with_condition_like = DB::table('laravelweb_users')->where('display_name', 'like', 'J%')->get();
 
     return response()->json([

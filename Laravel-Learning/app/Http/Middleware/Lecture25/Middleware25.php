@@ -4,6 +4,7 @@ namespace App\Http\Middleware\Lecture25;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Middleware25
 {
@@ -17,10 +18,9 @@ class Middleware25
     public function handle(Request $request, Closure $next)
     {
         // Kiểm tra có phải là admin hay ko? nếu sai trả ra 403 forbiden
-        if (!$request->user()) {
-            return response('Access denied. You are not an admin.', 403);
+        if (!Auth::check()) {
+            return route('login');
         }
-
         return $next($request);
     }
 }

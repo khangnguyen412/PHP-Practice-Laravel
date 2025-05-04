@@ -3,9 +3,10 @@
 namespace App\Models\lecture12; // Khi move file tới subfolder-> sửa lại namespace
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\Model as Model; // sử lib thường nếu dùng class model thường (extends Model) 
+use Illuminate\Foundation\Auth\User as Auth; // sử lib Auth nếu model nhằm mục đích Authentication (extends Auth) 
 
-class ModelLecture12 extends Model // Khi rename file -> sửa lại tên class
+class ModelLecture12 extends Auth // Khi rename file -> sửa lại tên class
 {
     use HasFactory;
 

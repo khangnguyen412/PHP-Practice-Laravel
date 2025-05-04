@@ -23,7 +23,7 @@ use Illuminate\Http\Request; // thư viện nhận tham số cho form post
  *  Route::prefix        Dùng tiền tố của đường dẫn
  */
 
-/******************* lecture 3: route (part1) ****************************/
+/******************* Lecture 3: Route (part1) ****************************/
 /**
  *  Route::get
  *  Cú pháp:
@@ -32,11 +32,11 @@ use Illuminate\Http\Request; // thư viện nhận tham số cho form post
  *      -> 'url' là đường dẫn trên web
  *      -> $action là một câu lệnh hoặc hàm nào đó khi được gọi tới đường dẫn trùng với $url
  */
-// gọi tới đường dẫn '/helloWorld' sẽ thực hiện 1 function ở phía sau
+// Gọi tới đường dẫn '/helloWorld' sẽ thực hiện 1 function ở phía sau
 Route::get('/hello-world', function () {
     return 'This is framework Laravel';
 });
-// gọi tới đường dẫn '/testGetRoute' chính sẽ được chuyển tới views/lecture03/testGetRoute.blade.php
+// Gọi tới đường dẫn '/testGetRoute' chính sẽ được chuyển tới views/lecture03/testGetRoute.blade.php
 Route::get('/test-route-get', function () {
     return view('lecture03.test-route-get');
 });
@@ -53,17 +53,17 @@ Route::get('/test-route-get', function () {
  *      -> 'url' là đường dẫn trên web
  *      -> $action là một câu lệnh hoặc hàm nào đó khi được gọi tới đường dẫn trùng với $url
  */
-// tạo 1 form nhập dữ liệu có method post tại file views/lecture03/getFormPost.blade.php
-// trong form sẽ có phương thức post vào gọi tới url /testPostRoute
+// Tạo 1 form nhập dữ liệu có method post tại file views/lecture03/getFormPost.blade.php
+// Trong form sẽ có phương thức post vào gọi tới url /testPostRoute
 Route::get('/get-post-form', function () {
     return view('lecture03.get-post-form');
 });
-// gọi tới đường dẫn '/testPostRoute' sẽ thực hiện 1 function ở phía sau nhưng sử dụng post
+// Gọi tới đường dẫn '/testPostRoute' sẽ thực hiện 1 function ở phía sau nhưng sử dụng post
 Route::post('/test-route-post', function (Request $arr) {
     $name = $arr->input('name');
     return "test method post của laravel và post có tham số là $name";
 });
-// để post sử dụng thư viện Request và nhận tham số của $arr
+// Để post sử dụng thư viện Request và nhận tham số của $arr
 
 /**
  *  Route::match
@@ -86,8 +86,8 @@ Route::match(['get', 'post'], '/test-route-match', function (Request $arr) {
     }
     return 'đã gọi vào thành công method match';
 });
-// khi gọi trực tiếp tới url /testMatchRoute trên thanh url của gg, match nhận method get
-// khi gọi nhập số từ url /getFormMatch và submit, match nhận method post
+// Khi gọi trực tiếp tới url /testMatchRoute trên thanh url của gg, match nhận method get
+// Khi gọi nhập số từ url /getFormMatch và submit, match nhận method post
 
 /**
  *  Route::any
@@ -104,7 +104,7 @@ Route::any('/test-route-any', function () {
 });
 
 
-/******************* lecture 4: route (part2) ****************************/
+/******************* Lecture 4: Route (part2) ****************************/
 /**
  *  Route::resource(): Là một chức năng giúp chúng ta xây dựng RESTful(websevice) một cách nhanh chóng.
  * 
@@ -170,7 +170,7 @@ Route::resource('/get-route-resource-with-param.author', ControllerLecture04::cl
  *      - $attr là các mãng thành phần điều kiện
  *      - $handle là các câu lệnh hoặc hàm thực hiện chức năng cho route đó
  */
-// sử dụng route::group(prefix)
+// Sử dụng route::group(prefix)
 Route::group(['prefix' => '/test-route-group'], function () {
     Route::get('get', function () {
         return view("lecture04.test-route-group");
@@ -179,7 +179,7 @@ Route::group(['prefix' => '/test-route-group'], function () {
         return 'đây là phần tử của route group';
     });
 });
-// sử dụng route::controller()
+// Sử dụng route::controller()
 Route::controller(ControllerLecture04::class)->group(function () {
     Route::get('/get-route-grp-with-ctrl/{param}', 'group');
     Route::get('/get-route-grp-with-ctrl', 'group');
@@ -220,8 +220,8 @@ Route::get('/test-redirect', function () {
 });
 
 
-/******************* lecture 5: route (part3) ****************************/
-// truyền biến vào route
+/******************* Lecture 5: Route (part3) ****************************/
+// Truyền biến vào route
 Route::get('/put-args-to-route/{param}', function ($param) {
     return view('lecture05.put-args-to-route', ['param' => $param]);
     /**
@@ -230,11 +230,11 @@ Route::get('/put-args-to-route/{param}', function ($param) {
      * nếu view có đường dẫn / thì dùng dấu . để phân cách 
      */
 });
-// truyền nhiều tham số vào route
+// Truyền nhiều tham số vào route
 Route::get('/put-args-to-route/{param1}/{param2}', function ($param1, $param2) {
     return view('lecture05.put-args-to-route2', ['param1' => $param1, "param2" => $param2]);
 });
-// truyền biến vào route có điều kiện, nếu đk không đúng => not found
+// Truyền biến vào route có điều kiện, nếu đk không đúng => not found
 Route::get('/put-args-in-route-with-condition/{param1}/{param2}', function ($param1, $param2) {
     return view('lecture05.put-args-to-route2', ['param1' => $param1, "param2" => $param2]);
 })->where(['param1' => '[a-z]+', 'param2' => '[0-9]+']);

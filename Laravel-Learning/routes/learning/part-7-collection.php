@@ -4,7 +4,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-/******************* lecture 14: Collection  ****************************/
+/******************* Lecture 14: Collection  ****************************/
 /**
  *  - Collections là một lớp tiện ích mạnh mẽ được xây dựng trên mảng (array) của PHP, giúp thao tác, xử lý và chuyển đổi dữ liệu một cách linh hoạt và dễ đọc.
  *  - Tài liệu: https://laravel.com/docs/5.3/collections#available-methods

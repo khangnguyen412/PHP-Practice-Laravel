@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 
 
-/******************* lecture 15 16: Schema builder  ****************************/
+/******************* Lecture 15 16: Schema builder  ****************************/
 /**
  *  - Xây dưng database bằng migrations (thực hiện trong Laravel-Learning/database/migrations)
  *  - Tạo Migrations:
@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Schema;
  *  - Muốn chạy lại vào db xoá bản migrations
  */
 
-/******************* lecture 17: Seeder  ****************************/
+/******************* Lecture 17: Seeder  ****************************/
 /**
  *  - Seeder có tác dụng dump các data mẫu để kiểm thử ứng dụng hoặc khởi tạo dữ liệu ban đầu 
  *  - Tạo Seeder:

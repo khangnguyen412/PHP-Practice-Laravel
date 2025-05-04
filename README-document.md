@@ -6,9 +6,7 @@ link tài liệu laravel 5.3: https://toidicode.com/hoc-laravel
 link tài liệu laravel 8: https://toidicode.com/series/hoc-laravel-8
 
 
-======================
-laravel 5.3
-
+================= laravel 5.3 ==============
 ======================
 lecture01: giới thiệu laravel
 
@@ -154,3 +152,20 @@ ghi chú bài học:
 
 ======================
 lecture27: Directives hữu dụng trong blade template
+(ko có ghi chú, vì frontend sẽ xử dụng nextJS ko dùng blade template)
+
+
+
+================= laravel 8.0 (bổ sung cho laravel 5.0) ==============
+======================
+lecture03 04 05: routes 
+ghi chú bài học:
+- /app/Providers/RouteServiceProvider.php
+- /routes/learning-ext-8/ext-part-1-route.php
+
+======================
+lecture08: blade template
+ghi chú bài học:
+- /app/Providers/RouteServiceProvider.php
+- /routes/learning-ext-8/ext-part-2-template.php
+- /resources/views/lecture-ext-8-01/test-view-engine.blade.php

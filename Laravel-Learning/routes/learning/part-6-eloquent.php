@@ -4,7 +4,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-/******************* lecture 12: Eloquent ORM trong Laravel ****************************/
+/******************* Lecture 12: Eloquent ORM trong Laravel ****************************/
 /**
  *  Gọi model trong controller
  *      - Tạo controller qua đường dẫn: /app/Http/Controllers/lecture12/lectureController12.php
@@ -32,7 +32,7 @@ Route::get('/update-data-model-12', [ControllerLecture12::class, "update_data"])
 // xóa dữ liệu trong bảng
 Route::get('/delete-data-model-12', [ControllerLecture12::class, "delete_data"]);
 
-/******************* lecture 13: Các mối quan hệ (Relationships) trong Eloquent ****************************/
+/******************* Lecture 13: Các mối quan hệ (Relationships) trong Eloquent ****************************/
 /**
  *  Các mối quan hệ trong Eloquent.
  *      - Tạo controller qua đường dẫn: /app/Http/Controllers/lecture13/lectureController13.php

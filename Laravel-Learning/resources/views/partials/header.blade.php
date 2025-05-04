@@ -24,7 +24,7 @@
                         <a href="/services">Dịch vụ</a>
                     </li>
                     <li class="py-5 px-3 text-gray-700 hover:text-gray-900">
-                        <a href="/contact">Liên hệ</a>
+                        <a href="{{ route('test-route-name') }}">Vào Userlist</a>
                     </li>
                 </ul>
 

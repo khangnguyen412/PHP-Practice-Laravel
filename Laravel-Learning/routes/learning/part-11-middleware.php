@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 
 use App\Http\Controllers\Lecture25\ControllerLecture25;
 
-/******************* lecture 25: Middleware Trong Laravel   ****************************/
+/******************* Lecture 25: Middleware Trong Laravel   ****************************/
 /**
  *  - Khái niệm: là lớp trung gian xử lý các request HTTP trước khi đến Controller và các response sau khi rời Controller.
  *  - Nó hoạt động như một "bộ lọc" (filter) hoặc "cầu nối" để kiểm tra, xử lý, hoặc thay đổi request/response theo logic nghiệp vụ trước hoặc sau khi request được xử lý.

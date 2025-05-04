@@ -8,7 +8,7 @@ use App\Http\Controllers\Lecture19\ControllerLecture19;
 use App\Http\Controllers\Lecture20\ControllerLecture20;
 use App\Http\Controllers\Lecture21\ControllerLecture21;
 
-/******************* lecture 18: Form Request  ****************************/
+/******************* Lecture 18: Form Request  ****************************/
 /**
  *  Doc về Form Request: https://laravel.com/docs/8.x/requests
  */
