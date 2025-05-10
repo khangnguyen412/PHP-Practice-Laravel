@@ -4,6 +4,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Lecture12\ControllerLecture12;
+use App\Http\Controllers\Lecture13\ControllerLecture13;
+
 /******************* Lecture 12: Eloquent ORM trong Laravel ****************************/
 /**
  *  Gọi model trong controller
@@ -11,8 +14,6 @@ use Illuminate\Support\Facades\Route;
  * 
  *  Note trong: /app/Http/Controllers/lecture12/lectureController12.php
  */
-
-use App\Http\Controllers\Lecture12\ControllerLecture12;
 // gọi model từ controller
 Route::get('/model-12', [ControllerLecture12::class, "test"]);
 // lấy tất cả datable trên bảng dữ liệu
@@ -44,8 +45,6 @@ Route::get('/delete-data-model-12', [ControllerLecture12::class, "delete_data"])
  * 
  *  Link Fix Lỗi: viblo.asia/p/eloquent-relationships-in-laravel-phan-1-PdbGnoEdeyA
  */
-
-use App\Http\Controllers\Lecture13\ControllerLecture13;
 // Eloquent one-to-one 
 Route::get('/relations-eloquent-13', [ControllerLecture13::class, 'show_eloquent_relationship_13']);
 // Eloquent one-to-many 

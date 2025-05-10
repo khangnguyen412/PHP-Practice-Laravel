@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\lecture12\ModelLecture12;
 use App\Http\Requests\Lecture23\RequestRegister;
+use Barryvdh\Debugbar\Facades\Debugbar;
 
 class ControllerLecture24 extends Controller
 {

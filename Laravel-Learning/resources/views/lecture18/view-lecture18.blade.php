@@ -13,7 +13,7 @@
 
     <main>
         <div class="container sm:container md:container lg:container xl:container 2xl:container mx-auto p-4">
-            <form action="/sent-request" method="POST">
+            <form action="/sent-request?query-string=khang" method="POST">
                 <!-- Ghi đè phương thức -->
                 @method('POST')
 
@@ -25,6 +25,7 @@
                     <div class="mb-2">
                         <label for="username" class="block text-gray-700 text-sm font-bold">Họ và tên</label>
                         <input type="text" id="username" name="username" placeholder="Nhập họ và tên" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" require />
+                        <span class="block text-sm font-bold">{{ old('username') }}</span> {{-- dùng để trả giá trị cũ từ session --}}
                     </div>
 
                     <!-- Email field -->
@@ -44,13 +45,22 @@
                         <label for="category" class="block text-gray-700 text-sm font-bold">Danh mục</label>
                         <select id="category" name="category" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="show-all">Show Toàn Bộ Data</option>
-                            <option value="show-name">Show Data Họ Và Tên</option>
+                            <option value="show-name">Show Data Tên</option>
                             <option value="show-method">Kiểm Tra Phương Thức Gửi</option>
                             <option value="show-path">Show Đường Dẫn</option>
                             <option value="show-with-only">Show Data Với Only</option>
                             <option value="show-with-input">Show Data Với Input</option>
                             <option value="show-with-collection">Show Data Với Collection</option>
                             <option value="show-ip">Show IP</option>
+                            <option value=""> ==== Laravel 8 ====</option>
+                            <option value="current-url">Show url hiện tại (bao gồm cả domain)</option>
+                            <option value="current-full-url">Show url hiện tại (bao gồm cách tham số sau ?param= )</option>
+                            <option value="method">Show phương thức hiện tại</option>
+                            <option value="current-header">Show user-agent của reuquest.</option>
+                            <option value="query-string">Show query string.</option>
+                            <option value="query-string-name">Show query string name.</option>
+                            <option value="has-name">Check username.</option>
+                            <option value="flash-name">Flash username.</option>
                         </select>
                     </div>
                 </div>

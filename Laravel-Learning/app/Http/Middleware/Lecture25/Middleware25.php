@@ -19,7 +19,19 @@ class Middleware25
     {
         // Kiểm tra có phải là admin hay ko? nếu sai trả ra 403 forbiden
         if (!Auth::check()) {
-            return route('login');
+            /**
+             *  - Middleware chỉ luôn trả về một đối tượng thuộc loại Response
+             *  - Các hàm trả về Response hợp lệ: 
+             *      + response()            => Trả về response tùy chỉnh
+             *      + response()->json()    => Trả về JSON response
+             *      + response()->view()    => Trả về view render
+             *      + redirect()            => Chuyển hướng (redirect)
+             *      + redirect()->route()   => Chuyển hướng bằng tên route
+             *      + redirect()->back()    => Chuyển hướng về trang trước
+             *      + abort()               => Dừng và trả về HTTP error
+             *      + $next($request)       => Chuyển request tiếp
+             */
+            return redirect()->route('login');
         }
         return $next($request);
     }

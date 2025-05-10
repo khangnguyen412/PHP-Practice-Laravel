@@ -5,6 +5,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 
+use App\Http\Controllers\Lecture12\ControllerLecture12;
 use App\Http\Controllers\Lecture25\ControllerLecture25;
 
 /******************* Lecture 25: Middleware Trong Laravel   ****************************/
@@ -25,3 +26,20 @@ use App\Http\Controllers\Lecture25\ControllerLecture25;
  *  - Middleware được khai báo trong biến $routeMiddleware của /app/Http/Kernel.php
  */
 Route::get('/middleware-forbiden', [ControllerLecture25::class, "show"])->middleware('check-is-admin');
+
+
+/**********************************************************************/
+/**********************************************************************/
+/******************* Laravel 8.0 (bổ sung) ****************************/
+/**********************************************************************/
+/**********************************************************************/
+
+/******************* Lecture 16: Middleware *****************************/
+/**
+ *  - Có thể thêm vào trong thuộc tính $middlewarePriority trong file app/Http/Kernel.php nếu muốn thay đổi vị trí ưu tiên.
+ *  - Có thể truyền tham số vào middleware
+ */
+Route::middleware('check-is-admin-ext:13')->group(function () {
+    Route::get('/userlist-ext', [ControllerLecture12::class, 'get_data']);
+});
+// Route::get('/userlist-ext', [ControllerLecture12::class, 'get_data']);

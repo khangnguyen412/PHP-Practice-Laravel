@@ -158,14 +158,48 @@ lecture27: Directives hữu dụng trong blade template
 
 ================= laravel 8.0 (bổ sung cho laravel 5.0) ==============
 ======================
-lecture03 04 05: routes 
+lecture03 04 05: Routes 
 ghi chú bài học:
-- /app/Providers/RouteServiceProvider.php
-- /routes/learning-ext-8/ext-part-1-route.php
+- /routes/learning/part-1-route.php
 
 ======================
-lecture08: blade template
+lecture08 09 10 11: Blade template
+ghi chú bài học:
+- /routes/learning/part-2-template.php
+- /resources/views/lecture06/view-template.blade.php
+- /resources/views/lecture06/view-template(child-01).blade.php
+- /resources/views/lecture06/view-template(child-02).blade.php
+
+======================
+lecture12 13 14: Request
+ghi chú bài học:
+- /app/Http/Controllers/Lecture18/ControllerLecture18.php
+- /routes/learning/part-9-form-request.php
+- /resources/views/lecture18/view-lecture18.blade.php
+
+======================
+lecture15: Response
 ghi chú bài học:
 - /app/Providers/RouteServiceProvider.php
-- /routes/learning-ext-8/ext-part-2-template.php
-- /resources/views/lecture-ext-8-01/test-view-engine.blade.php
+- /app/Http/Controllers/Lecture24/ControllerLecture24Ext.php
+- /routes/learning/part-12-other.php
+
+======================
+lecture16: Middleware
+ghi chú bài học:
+- /app/Http/Kernel.php
+- /app/Http/Middleware/LectureExtension/MiddlewareExt16.php
+- /routes/learning/part-11-middleware.php
+
+======================
+lecture17: Controller
+ghi chú bài học:
+- /app/Providers/RouteServiceProvider.php
+- /routes/learning/part-3-controller.php
+
+======================
+lecture18: Url 
+ghi chú bài học:
+- /app/Providers/RouteServiceProvider.php
+- /routes/learning/part-12-other.php
+- /resources/views/lectureext/view-lecture26.blade.php

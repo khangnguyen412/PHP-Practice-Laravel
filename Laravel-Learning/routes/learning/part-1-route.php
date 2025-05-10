@@ -5,6 +5,10 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request; // thư viện nhận tham số cho form post
 
+use App\Http\Controllers\Lecture04\ControllerLecture04; // Gọi controller từ lecture04\ControllerLecture04
+use App\Http\Controllers\Lecture24\ControllerLecture24;
+use App\Models\lecture12\ModelLecture12 as UserList;
+
 /**
  *  Các Loại Route:
  *  Route::get
@@ -120,7 +124,6 @@ Route::any('/test-route-any', function () {
  *  Trong đó: 
  *      -> TenController là tên của controller bạn muốn tạo
  */
-use App\Http\Controllers\Lecture04\ControllerLecture04; // Gọi controller từ lecture04\ControllerLecture04
 /**
  *  - Nhận menthod index() từ controler
  *  - Gọi  url /getRouteResource để nhận method index()
@@ -145,7 +148,7 @@ Route::resource('/get-route-resource-except', ControllerLecture04::class, ['exce
 /**
  *  - Truyền tham số thêm vào route resource
  *  - Gọi url /get-route-resource-with-param/{param1}/author/{param2}
- */ 
+ */
 Route::resource('/get-route-resource-with-param.author', ControllerLecture04::class);
 /**
  *  *Lưu ý: ['only']['except'] Chỉ sử dụng được với cái phương thức mà controller tạo sẳn, ko sử dụng được với phương thức khác
@@ -238,3 +241,61 @@ Route::get('/put-args-to-route/{param1}/{param2}', function ($param1, $param2) {
 Route::get('/put-args-in-route-with-condition/{param1}/{param2}', function ($param1, $param2) {
     return view('lecture05.put-args-to-route2', ['param1' => $param1, "param2" => $param2]);
 })->where(['param1' => '[a-z]+', 'param2' => '[0-9]+']);
+
+
+/**********************************************************************/
+/**********************************************************************/
+/******************* Laravel 8.0 (bổ sung) ****************************/
+/**********************************************************************/
+/**********************************************************************/
+
+/******************* Lecture 3: Route (part 2) ****************************/
+/**
+ *  Dependency Injection:  
+ *  - Kỹ thuật cho phép Laravel tự động đưa đối tượng cần thiết vào hàm (hoặc constructor) mà bạn định nghĩa
+ */
+Route::get('/test-dependency', function (Request $request) {
+    return $request->user();
+});
+
+/**
+ *  Đặt tên cho route
+ *  - Laravel có cho phép đặt tên cho route để tiện cho việc quản lý và generate ra route URL.
+ *  - Cú pháp
+ *      name($url);
+ *  - Trong đó:
+ *      [url]: các url đc generate bởi route để gọi trong view
+ */
+Route::get('/test-route-name', [ControllerLecture24::class, 'show'])->name('test-route-name'); // gọi vào /project, menu trên thanh nav
+
+/**
+ *  Generate URL sử dụng route name.
+ *  - Tạo ra URL qua route name
+ *  - Trong Laravel-Learning/resources/views/partials/header.blade.php
+ */
+
+/******************* Lecture 4: Route (part 3) ****************************/
+/**
+ *  Route subdomain: cho phép định nghĩa các route hoạt động dựa trên subdomain (tên miền phụ)
+ *  - Tính năng này rất hữu ích khi bạn muốn phân tách các phần của ứng dụng theo tên miền
+ *  - Skip do phải cấu hình lại file nginx/conf.d/default.conf
+ */
+// Route::domain('admin.docker-laravel.com')->group(function(){
+//     Route::get('/', [ControllerLecture24::class, 'show']);
+// });
+
+/**
+ *  Binding Model Trong Route
+ *  - một tính năng mạnh mẽ của Laravel giúp tự động lấy bản ghi tương ứng từ database trực tiếp trong route ko qua controler
+ */
+Route::get('/test-bind-model', function (UserList $user) {
+    return response()->json(['data' => $user->all()], 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+});
+
+/**
+ *  Lấy route hiện tại.
+ */
+Route::get('/get-current-route', function () {
+    $current_route = Route::current()->uri();
+    return $current_route;
+});

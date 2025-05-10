@@ -110,3 +110,15 @@ Route::get('/test-blade-template-with-condition', function () {
 Route::get('/test-blade-template-inheritance', function () {
     return view("lecture08.test-view-template-inheritance");
 });
+
+
+/**********************************************************************/
+/**********************************************************************/
+/******************* Laravel 8.0 (bổ sung) ****************************/
+/**********************************************************************/
+/**********************************************************************/
+
+/******************* Lecture 8 9 10 11: View template ****************************/
+Route::get('/test-blade-template-ext', function () {
+    return view('lecture06.view-template(child-01)');
+});

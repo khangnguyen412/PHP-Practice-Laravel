@@ -61,7 +61,7 @@ Route::get('/get-database', function () {
         'total'     => 'Tìm thấy: ' . sizeof($data) . " kết quả của truy vấn",
         'data'      => $data,
     ], 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-});
+})->name('get-data');
 
 /**
  *  - Lấy cột trong bảng

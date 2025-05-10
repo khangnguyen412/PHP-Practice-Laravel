@@ -3,6 +3,7 @@
 /******************* Gọi Thư Viện ****************************/
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Lecture18\ControllerLecture18;
 use App\Http\Controllers\Lecture19\ControllerLecture19;
 use App\Http\Controllers\Lecture20\ControllerLecture20;
@@ -42,3 +43,12 @@ Route::post('/sent-valid', [ControllerLecture20::class, 'validations_form']);
  */
 Route::get('/form-request-valid', [ControllerLecture21::class, 'get_form']);
 Route::post('/sent-request-valid', [ControllerLecture21::class, 'validations_form_request']);
+
+
+/**********************************************************************/
+/**********************************************************************/
+/******************* Laravel 8.0 (bổ sung) ****************************/
+/**********************************************************************/
+/**********************************************************************/
+
+/******************* Lecture 12 13: Request (gọi vào /form-request để xem bổ sung) ****************************/
