@@ -35,8 +35,8 @@ use Barryvdh\Debugbar\Facades\Debugbar;
  */
 Route::get('/get-database', function () {
     // Tắt debugbar
-    Debugbar::disable(); 
-    
+    Debugbar::disable();
+
     // Lấy bản test
     $data = DB::table('laravelweb_users')->get();
 
@@ -54,7 +54,7 @@ Route::get('/get-database', function () {
     // echo "<pre>"; 
     // var_dump($data);
     // echo "</pre>"; 
-    
+
     // Cách 4:
     return response()->json([
         'message'   => 'Truy xuất data',
@@ -332,8 +332,8 @@ Route::get('/update-database', function () {
  */
 Route::get('/delete-database', function () {
     Debugbar::disable();
-    try{
-        if (DB::table('laravelweb_products')->where('product_id', '>', 15)->count()>0) {
+    try {
+        if (DB::table('laravelweb_products')->where('product_id', '>', 15)->count() > 0) {
             DB::table('laravelweb_products')->where('product_id', '>', 15)->delete();
             $data_delete = DB::table('laravelweb_products')->get();
             return response()->json([
@@ -346,11 +346,45 @@ Route::get('/delete-database', function () {
             'message'   => 'Không tìm thấy bản ghi nào để xóa',
             'data'      => DB::table('laravelweb_products')->get()
         ], 404, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-    }catch(Exception $e){
+    } catch (Exception $e) {
         return response()->json([
             'code'      => 'Mã lỗi: ' . $e->getCode(),
             'message'   => 'Xóa bản ghi thất bại: ' . $e->getMessage(),
             'data'      => null
         ], 500, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    }
+});
+
+/**********************************************************************/
+/**********************************************************************/
+/******************* Laravel 8.0 (bổ sung) ****************************/
+/**********************************************************************/
+/**********************************************************************/
+
+/****************** Lecture 25: Query Builder  ***********************************/
+/**
+ *  Chunk Database: 
+ *      - Là một phương thức giúp xử lý dữ liệu lớn hiệu quả bằng cách chia kết quả truy vấn thành các khối nhỏ (chunk) thay vì tải toàn bộ dữ liệu vào bộ nhớ cùng lúc
+ *      - Điều này rất hữu ích khi bạn làm việc với hàng nghìn hoặc hàng triệu bản ghi , tránh tình trạng memory exhausted (hết RAM).
+ */
+Route::get('/chunk-database', function () {
+    Debugbar::disable();
+    try {
+        $page_data = [];
+        DB::table('laravelweb_pages')->orderBy('page_id')->chunk(10, function($pages) use (&$page_data){
+            foreach ($pages as $page) {
+                $page_data[] = $page;
+            }
+        });
+        return response()->json([
+            'message'           => "Thành công",
+            'data'              => $page_data,
+        ], 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    } catch (Exception $e) {
+        return response()->json([
+            'code'      => 'Mã lỗi: ' . $e->getCode(),
+            'message'   => 'Xóa bản ghi thất bại: ' . $e->getMessage(),
+            'data'      => null
+        ], 500, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE );
     }
 });

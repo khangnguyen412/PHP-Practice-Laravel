@@ -25,8 +25,8 @@ use App\Http\Controllers\Lecture24\ControllerLecture24;
 /**
  *  - Cách 2: khai báo theo nhóm
  */
-Route::get('login', [ControllerLecture23::class, 'show'])->name('login');
-Route::post('login', [ControllerLecture23::class, 'login_handle']);
+Route::get('/login', [ControllerLecture23::class, 'show'])->name('login');
+Route::post('/login', [ControllerLecture23::class, 'login_handle']);
 /**
  *  Lưu ý nếu có báo lỗi: Base table or view not found: 1146 Table '.users' doesn't exist
  *  -> Vào Laravel-Learning/config/auth.php config lại model ở mục `User Providers`
