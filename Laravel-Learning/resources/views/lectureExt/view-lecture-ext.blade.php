@@ -25,6 +25,10 @@
             </h1>
             @yield('session-lecture')
         @endif <br>
+
+        @hasSection('valid-lecture')
+            @yield('valid-lecture')
+        @endif <br>
     </main>
 
     @include('partials.footer')

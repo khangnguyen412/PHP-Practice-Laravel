@@ -163,7 +163,7 @@ ghi chú bài học:
 - /routes/learning/part-1-route.php
 
 ======================
-lecture08 09 10 11: Blade template
+lecture06 07 08 09 10 11: Blade template
 ghi chú bài học:
 - /routes/learning/part-2-template.php
 - /resources/views/lecture06/view-template.blade.php
@@ -203,3 +203,49 @@ ghi chú bài học:
 - /app/Providers/RouteServiceProvider.php
 - /routes/learning/part-12-other.php
 - /resources/views/lectureext/view-lecture26.blade.php
+
+======================
+lecture19: Session 
+ghi chú bài học:
+- /app/Providers/RouteServiceProvider.php
+- /routes/learning/part-ext-19-session.php
+
+======================
+lecture20 21: Validation
+ghi chú bài học:
+- /app/Providers/RouteServiceProvider.php
+- /app/Http/Requests/LectureExt/RequestFormExt.php
+- /app/Rules/ValidCustomRule.php
+- /routes/learning/part-ext-21-validation.php
+
+======================
+lecture22: Xử lý lỗi
+ghi chú bài học:
+- /app/Providers/RouteServiceProvider.php
+- /routes/learning/part-ext-22-exception.php
+
+======================
+lecture23: Collection
+ghi chú bài học:
+- /app/Http/Controllers/Lecture14/controllerLecture14.php
+- /routes/learning/part-7-collection.php
+
+======================
+lecture24: Database
+ghi chú bài học:
+- /routes/learning/part-8-database.php
+
+======================
+lecture25: Query Builder
+ghi chú bài học:
+- /routes/learning/part-4-query-builder.php
+
+======================
+lecture26: Pagination
+ghi chú bài học:
+- /routes/learning/part-ext-26-pagination.php
+
+======================
+lecture: Other
+ghi chú bài học:
+- /routes/learning/part-ext-other.php

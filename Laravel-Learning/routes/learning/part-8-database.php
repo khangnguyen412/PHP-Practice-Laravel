@@ -3,7 +3,7 @@
 /******************* Gọi Thư Viện ****************************/
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 
 /******************* Lecture 15 16: Schema builder  ****************************/
@@ -47,3 +47,94 @@ use Illuminate\Support\Facades\Schema;
  *      $ php artisan db:seed
  *  - Seeding của bảng pivot: xem trong Laravel-Learning/database/seeders/DatabaseSeederAcountLevel.php
  */
+
+
+
+
+/**********************************************************************/
+/**********************************************************************/
+/******************* Laravel 8.0 (bổ sung) ****************************/
+/**********************************************************************/
+/**********************************************************************/
+
+/****************** Lecture 24: DB  ***********************************/
+/**
+ *  Select Database
+ */
+Route::get('/db-select-test', function () {
+    $user = DB::select('SELECT * FROM laravelweb_users WHERE user_id = ?', [1]);
+    return response()->json(['data' => $user], 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+});
+
+/**
+ *  Insert Database
+ */
+Route::get('/db-insert-test', function () {
+    DB::insert(
+        'INSERT INTO laravelweb_pages (title, slug, meta_title, meta_description, body, canonical_url, user_id, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?, ?)',
+        [
+            'Testimonials Test',
+            'testimonials-test',
+            'Testimonials',
+            'What our clients say',
+            'This is the testimonials page...',
+            'https://example.com/testimonials',
+            3,
+            now(),
+            now()
+        ]
+    );
+    $user = DB::select('select * from laravelweb_pages');
+    return response()->json(['data' => $user], 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+});
+
+/**
+ *  Update Database
+ */
+Route::get('/db-update-test', function () {
+    DB::update('UPDATE laravelweb_pages SET user_id = 4 WHERE slug = "testimonials-test"');
+    $user = DB::select('select * from laravelweb_pages');
+    return response()->json(['data' => $user], 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+});
+
+/**
+ *  Delete Database
+ */
+Route::get('/db-delete-test', function () {
+    DB::delete('DELETE FROM laravelweb_pages WHERE slug = "testimonials-test"');
+    $user = DB::select('select * from laravelweb_pages');
+    return response()->json(['data' => $user], 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+});
+
+/**
+ *  Database Transaction
+ *     - Giúp thực hiện nhiều thao tác cơ sở dữ liệu như một khối thống nhất 
+ *     - Đảm bảo rằng tất cả thành công hoặc tất cả thất bại
+ */
+Route::get('/db-transaction-test', function () {
+    DB::beginTransaction();
+    try {
+        DB::insert(
+            'INSERT INTO laravelweb_pages (title, slug, meta_title, meta_description, body, canonical_url, user_id, created_at, updated_at) VALUES (?,?,?,?,?,?,?,?, ?)',
+            [
+                'Testimonials Test',
+                'testimonials-test',
+                'Testimonials',
+                'What our clients say',
+                'This is the testimonials page...',
+                'https://example.com/testimonials',
+                3,
+                now(),
+                now()
+            ]
+        );
+        DB::update('UPDATE laravelweb_pages SET user_id = 4 WHERE slug = "testimonials-test"');
+        DB::delete('DELETE FROM laravelweb_pages WHERE slug = "testimonials-test"');
+        DB::commit();
+        $user = DB::select('select * from laravelweb_pages');
+        return response()->json(['data' => $user], 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    } catch (Exception $e) {
+        DB::rollBack();
+        throw $e;
+    };
+});
