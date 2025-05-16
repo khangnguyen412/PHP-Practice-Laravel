@@ -28,5 +28,7 @@ SELECT * FROM laravelweb_product_meta WHERE product_id = 10;
 SELECT * FROM laravelweb_products WHERE product_id = 10;
 SELECT product_id, name FROM laravelweb_products WHERE product_id = 10 UNION SELECT product_id, meta_key FROM laravelweb_product_meta WHERE product_id = 10;
 SELECT sum(price) as "Total Price", category_id FROM laravelweb_products Group By category_id Having `Total Price` > 1000;
+select `user_id` from `laravelweb_posts` where `slug` like "healthy-breakfast-ideas";
+select * from `laravelweb_users` where `user_id` in (select `user_id` from `laravelweb_posts` where `title` = "Healthy Breakfast Ideas");
 
 SET SQL_SAFE_UPDATES = 0;

@@ -246,6 +246,11 @@ ghi chú bài học:
 - /routes/learning/part-ext-26-pagination.php
 
 ======================
+lecture30: Query với Eloquent
+ghi chú bài học:
+- /routes/learning/part-ext-30-query-eloquent.php
+
+======================
 lecture: Other
 ghi chú bài học:
 - /routes/learning/part-ext-other.php

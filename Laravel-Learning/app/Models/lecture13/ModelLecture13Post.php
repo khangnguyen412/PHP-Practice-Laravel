@@ -5,6 +5,7 @@ namespace App\Models\lecture13;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\App;
 
 /**
@@ -14,9 +15,10 @@ use Illuminate\Support\Facades\App;
 class ModelLecture13Post extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     protected $table = 'laravelweb_posts';
     protected $primaryKey = 'post_id';
-    protected $field = [
+    protected $fillable = [
         'title',
         'slug',
         'meta_title',
@@ -25,8 +27,7 @@ class ModelLecture13Post extends Model
         'canonical_url',
         'user_id',
         'created_at',
-        'pupdated_at',
-
+        'updated_at',
     ];
     public $timestamp = false;
 

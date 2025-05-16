@@ -23,6 +23,7 @@ class ModelLecture11 extends Model
     /**
      *  Khai báo lọc cột dữ liệu: 
      *  - Chỉ lấy những thông số cần truy xuất trên một bảng
+     *  - Tên bắt buộc ko thể đổi được, cho phép insert hàng loạt data vào bảng
      */
     protected $fillable = [
         'user_name',
@@ -34,6 +35,11 @@ class ModelLecture11 extends Model
         'created_at',
         'updated_at'
     ];
+
+    /**
+     *  Khai báo những fill đc bảo bệ (cấm ko đc fill vào trường này)
+     */
+    protected $guarded = []; // Không nên dùng kiểu [] này vì dễ gây tấn công Mass Assignment. 
 
     /**
      *  Khai báo timestamps
