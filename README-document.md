@@ -251,6 +251,18 @@ ghi chú bài học:
 - /routes/learning/part-ext-30-query-eloquent.php
 
 ======================
+lecture31: Scope
+ghi chú bài học:
+- routes/learning/part-ext-31-query-scope.php
+- app/Http/Controllers/Lecture30/ControllerLecture30.php
+- app/Models/lecture26/ModelLecture26.php
+- app/Scopes/UsersScope.php
+
+======================
+lecture31: Event
+ghi chú bài học:
+
+======================
 lecture: Other
 ghi chú bài học:
 - /routes/learning/part-ext-other.php

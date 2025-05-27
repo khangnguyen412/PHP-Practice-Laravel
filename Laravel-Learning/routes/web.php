@@ -53,3 +53,5 @@ use App\Http\Controllers\HomeController;
 
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+use Rap2hpoutre\LaravelLogViewer\LogViewerController;
+Route::get('logs', [LogViewerController::class, 'index']); // thêm middleware nếu cần

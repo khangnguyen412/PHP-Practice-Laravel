@@ -73,6 +73,8 @@ Route::get('/test-middleware-controller-condition', [ControllerLecture09Ext03::c
  *      $ php artisan make:controller [tên sub folder]/[tên controller] --resource
  */
 /**
+ *  - Thường sẽ sử dụng routes/api.php để gửi api ra bên frontend sử dụng câu lệnh 
+ *      $ php artisan install:api
  *  - Tự động sinh ra các route RESTful cho model Post
  *  - Gọi trong template: {{route([route-name].[method], $param)}}
  */

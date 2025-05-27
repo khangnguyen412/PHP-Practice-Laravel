@@ -36,7 +36,7 @@ services:
       - laravel
 
   mysql:
-    image: mysql:5.7
+    image: mysql:5.7 # chỉ nên chạy 5.7
     container_name: Laravel-Sql
     restart: always
     environment:
