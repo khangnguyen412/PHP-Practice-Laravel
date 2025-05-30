@@ -253,14 +253,48 @@ ghi chú bài học:
 ======================
 lecture31: Scope
 ghi chú bài học:
-- routes/learning/part-ext-31-query-scope.php
-- app/Http/Controllers/Lecture30/ControllerLecture30.php
-- app/Models/lecture26/ModelLecture26.php
-- app/Scopes/UsersScope.php
+- /routes/learning/part-ext-31-query-scope.php
+- /app/Http/Controllers/Lecture30/ControllerLecture30.php
+- /app/Models/lecture26/ModelLecture26.php
+- /app/Scopes/UsersScope.php
 
 ======================
 lecture31: Event
 ghi chú bài học:
+- /routes/learning/part-ext-32-query-event.php
+- /app/Http/Controllers/Lecture32/ControllerLecture32.php
+- /app/Models/lecture32/ModelLecture32.php
+- /app/Providers/AppServiceProvider.php
+- /app/Observers/Observer.php
+
+======================
+lecture32 33 34: Eloquent
+ghi chú bài học:
+- /routes/learning/part-6-eloquent.php
+- /app/Http/Controllers/Lecture13/controllerLecture13.php
+- /app/Models/lecture13/ModelLecture13Post.php
+- /app/Models/lecture13/ModelLecture13Media.php
+- /app/Models/lecture13/ModelLecture13CatePost.php
+
+======================
+lecture35: Collection Eloquent
+ghi chú bài học:
+- /routes/learning/part-6-eloquent.php
+- /app/Http/Controllers/Lecture13/controllerLecture13.php
+
+======================
+lecture36: Mutator và Cast
+ghi chú bài học:
+- /routes/learning/part-6-eloquent.php
+- /app/Http/Controllers/Lecture13/controllerLecture13.php
+- /app/Models/lecture13/ModelLecture13Users.php
+
+======================
+lecture37: Eloquent ORM Serialize
+ghi chú bài học:
+- /routes/learning/part-6-eloquent.php
+- /app/Http/Controllers/Lecture13/controllerLecture13.php
+
 
 ======================
 lecture: Other

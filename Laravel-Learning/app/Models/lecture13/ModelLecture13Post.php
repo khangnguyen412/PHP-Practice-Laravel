@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\App;
 class ModelLecture13Post extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    // use SoftDeletes;
     protected $table = 'laravelweb_posts';
     protected $primaryKey = 'post_id';
     protected $fillable = [
@@ -34,12 +34,43 @@ class ModelLecture13Post extends Model
     public function categories()
     {
         /**
-         * belongsToMany($related, $table, $foreignKey, $relatedKey): quan hệ n - n
-         * $related: đường dẫn của [namespace hiện tại]\[class liên kết của bảng cha còn lại] hoặc tên class
-         * $table: tên bảng trung gian
-         * $foreignKey: tên khóa ngoại của bảng n thứ 1
-         * $relatedKey: tên khóa ngoại của bảng n thứ 2
+         *  belongsToMany($related, $table, $foreignKey, $relatedKey): quan hệ n - n
+         *  $related: đường dẫn của [namespace hiện tại]\[class liên kết của bảng cha còn lại] hoặc tên class
+         *  $table: tên bảng trung gian
+         *  $foreignKey: tên khóa ngoại của bảng n thứ 1
+         *  $relatedKey: tên khóa ngoại của bảng n thứ 2
          */
-        return $this->belongsToMany(ModelLecture13Categories::class, 'laravelweb_categories_posts', 'post_id', 'category_id');
+        return $this->belongsToMany(
+            ModelLecture13Categories::class,
+            'laravelweb_categories_posts',
+            'post_id',
+            'category_id'
+        );
+    }
+
+    public function has_many_through()
+    {
+        /**
+         *  hasManyThrough($related, $through, $firstKey = null, $secondKey = null, $localKey = null, $secondLocalKey = null) 
+         *  - Bảng đích: Categories
+         *  - Bảng này: Post
+         */
+        return $this->hasManyThrough(
+            ModelLecture13Categories::class,    // Bảng đích cuối cùng bạn muốn lấy
+            ModelLecture13CatePost::class,      // Bảng trung gian
+            'post_id',                          // Khóa ngoại trên bảng trung gian trỏ đến chính bảng này
+            'category_id',                      // Khóa chính trên bảng đích
+            'post_id',                          // Khóa chính trên bảng này
+            'category_id'                       // Khóa ngoại trên bảng trung gian trỏ đến bảng đích
+        );
+    }
+
+    public function morph_media()
+    {
+        /**
+         *  Morph lấy cột model_type và model_id để nối với các bảng với nhau
+         *  - Ví dụ: để nối bảng này thì model_type của bảng midel phải là App\\Models\\lecture13\\ModelLecture13Post
+         */
+        return $this->morphMany(ModelLecture13Media::class, 'model');
     }
 }

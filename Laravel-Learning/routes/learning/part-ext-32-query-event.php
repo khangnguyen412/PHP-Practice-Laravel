@@ -25,3 +25,5 @@ use App\Http\Controllers\Lecture32\ControllerLecture32;
  */
 
 Route::get('/test-event-eloquent', [ControllerLecture32::class, 'check_event']);
+Route::get('/test-event-observer-eloquent', [ControllerLecture32::class, 'check_event_observer']);
+Route::get('/test-disable-event-eloquent', [ControllerLecture32::class, 'disable_event']);

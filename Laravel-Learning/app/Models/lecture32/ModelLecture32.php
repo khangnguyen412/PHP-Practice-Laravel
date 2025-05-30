@@ -5,8 +5,6 @@ namespace App\Models\lecture32;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 
-use App\Scopes\UsersScope;
-
 class ModelLecture32 extends Model
 {
     protected $table = "laravelweb_users";

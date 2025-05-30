@@ -15,3 +15,4 @@ use App\Http\Controllers\Lecture31\ControllerLecture31;
 
 Route::get('/test-local-scope', [ControllerLecture31::class, 'check_local_scope']);
 Route::get('/test-global-scope', [ControllerLecture31::class, 'check_global_scope']);
+Route::get('/test-disable-global-scope', [ControllerLecture31::class, 'disable_scope']);

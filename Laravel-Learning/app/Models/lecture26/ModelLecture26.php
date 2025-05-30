@@ -41,7 +41,7 @@ class ModelLecture26 extends Model
         /**
          *  Sử dụng anonymous global scope.
          *  - Truyền vào phương thức addGlobalScope như 1 dạng closure
-         *  - Để loại bỏ Scope này chay: Model::withoutGlobalScope('[tên scope]')
+         *  - Để loại bỏ Scope này chạy: Model::withoutGlobalScope('[tên scope]')
          */
         // static::addGlobalScope('ClosureScope', function($builder){
         //     return $builder->whereNotNull('created_at');

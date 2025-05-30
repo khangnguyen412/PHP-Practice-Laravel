@@ -13,10 +13,7 @@ class ControllerLecture31 extends Controller
         /**
          *  - Gọi và sử dụng scopeCountUser() trong /Models/lecture26/ModelLecture26.php
          */
-        /**
-         *  - 
-         */
-        $list = ModelLecture26::withoutGlobalScope(UsersScope::class)->countUser(); 
+        $list = ModelLecture26::countUser(); 
         return response()->json([
             'status'    => 'success',
             'data'      => $list,
@@ -33,4 +30,16 @@ class ControllerLecture31 extends Controller
             'data'      => $list,
         ], 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     }
+
+    public function disable_scope() {
+        /**
+         *  - withoutGlobalScope dùng để bỏ các scope
+         */
+        $list = ModelLecture26::withoutGlobalScope(UsersScope::class)->countUser(); 
+        return response()->json([
+            'status'    => 'success',
+            'data'      => $list,
+        ], 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    }
+
 }

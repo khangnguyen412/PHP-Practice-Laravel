@@ -27,6 +27,7 @@ class ModelLecture13Users extends Model
         'address',
         'phone',
     ];
+    protected $appends = ['full_name'];
     public $timestamp = false;
 
     public function user_profiles()
@@ -58,4 +59,36 @@ class ModelLecture13Users extends Model
          */
         return $this->hasMany(ModelLecture13Products::class, 'user_id', 'user_id');
     }
+
+    /**
+     *  Accessors
+     *  - Để đưa được thuộc tính ảo này vào Json (sủ dụng cho API) => khai báo thêm protected $appends = [''] ỏ trên
+     *  - Cách đặt tên hàm và gọi: get{TênThuộcTính}Attribute()
+     */
+    public function getFullNameAttribute(){ // Cách gọi $user->full_name
+        return ucfirst($this->user_name)." accessors added";
+    }
+
+    /**
+     *  Mutators là gì?
+     *  - Cho phép bạn thay đổi giá trị trước khi lưu vào CSDL 
+     *  Khi nào nên dùng?
+     *  - Bạn cần xử lý dữ liệu trước khi lưu
+     *  - Không muốn logic này nằm trong controller
+     */
+    
+    /**
+     *  Casts là gì?
+     *  - Dùng để tự động chuyển đổi kiểu dữ liệu khi lấy hoặc lưu vào CSDL
+     *  Khi nào nên dùng?
+     *  - Dữ liệu trong DB không đúng kiểu bạn muốn ở code (ví dụ: JSON, boolean) 
+     *  - Muốn tự động format ngày tháng, số,...
+     *  - Tránh phải xử lý thủ công mỗi lần truy vấn
+     */
+    // protected $casts = [
+    //     'is_admin' => 'boolean',
+    //     'options' => 'array',
+    //     'meta' => 'json',
+    //     'created_at' => 'datetime:Y-m-d H:i:s',
+    // ];
 }
