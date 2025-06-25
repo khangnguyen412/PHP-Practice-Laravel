@@ -1,14 +1,14 @@
-## Practice Laravel
+##  Practice Laravel
 - Descripttion: Project Laravel for practice and research with the Laravel Framework
 - Purpose: For learning and researching Laravel deeper, this project recorded my learning process.
 
-## Technology in project:
+##  Technology in project:
 - Language: HTML, CSS, PHP, JS
 - Tailwind
 - Docker
 - Laravel
 
-## How to start and testing project
+##  How to start and testing project
 ### Start with xampp, wamp (don't need install docker desktop) 
 - Start project with cmd: 
 ```
@@ -38,7 +38,7 @@ docker exec Laravel-App php artisan serve --host=0.0.0.0 --port=8000
 docker exec -it Laravel-App bash
 ```
 
-## Project structure 
+##  Project structure 
 ```
 Laravel/
 ├──Laravel-Learning/
