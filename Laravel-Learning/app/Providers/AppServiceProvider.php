@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\View;
 use App\Models\lecture13\ModelLecture13Users;
 use App\Observers\Observer;
 
+
+use App\Repositories\UsersRepositoryInterface;
+use App\Repositories\UsersRepository;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -17,7 +21,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+            UsersRepositoryInterface::class,
+            UsersRepository::class,
+        );
     }
 
     /**
