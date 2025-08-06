@@ -1,5 +1,4 @@
-version: '3.9'
-name: laravel-learning
+name: php-laravel-learning
 
 services:
   app:
@@ -67,7 +66,7 @@ services:
         limits:
           cpus: '1'
           memory: 1G
-      reservations:
+        reservations:
           cpus: '0.5'
           memory: 512M
 
